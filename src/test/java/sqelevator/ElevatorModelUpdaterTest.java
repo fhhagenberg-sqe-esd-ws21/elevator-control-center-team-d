@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
  * @author Markus Lindner - s2010567018
  */
 @ExtendWith(MockitoExtension.class)
-public class ElevatorModelUpdaterTest {
+class ElevatorModelUpdaterTest {
 
     @Mock
     private IElevator mockedInterface = mock(IElevator.class);
