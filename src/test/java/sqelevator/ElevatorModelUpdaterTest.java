@@ -21,7 +21,7 @@ public class ElevatorModelUpdaterTest {
     private IElevator mockedInterface = mock(IElevator.class);
 
     @Test
-    public void testUpdateModel_committedDirection_pass() throws RemoteException {
+    void testUpdateModel_committedDirection_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -34,7 +34,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorAccel_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getElevatorAccel_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -48,7 +48,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorDoorStatus_pass() throws RemoteException {
+    void testUpdateModel_getElevatorDoorStatus_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -61,7 +61,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorDoorStatus_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getElevatorDoorStatus_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -75,7 +75,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorFloor_pass() throws RemoteException {
+    void testUpdateModel_getElevatorFloor_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -88,7 +88,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorFloor_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getElevatorFloor_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -102,7 +102,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorPosition_pass() throws RemoteException {
+    void testUpdateModel_getElevatorPosition_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -115,7 +115,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorPosition_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getElevatorPosition_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -129,7 +129,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorSpeed_pass() throws RemoteException {
+    void testUpdateModel_getElevatorSpeed_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -142,7 +142,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorWeight_pass() throws RemoteException {
+    void testUpdateModel_getElevatorWeight_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -155,7 +155,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorWeight_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getElevatorWeight_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -169,7 +169,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorCapacity_pass() throws RemoteException {
+    void testUpdateModel_getElevatorCapacity_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -182,7 +182,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorCapacity_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getElevatorCapacity_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -196,7 +196,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getTarget_pass() throws RemoteException {
+    void testUpdateModel_getTarget_pass() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -209,7 +209,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getTarget_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getTarget_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
         ElevatorModel model = new ElevatorModel(1, 10, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
@@ -223,7 +223,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getFloorButtonDown_pass() throws RemoteException {
+    void testUpdateModel_getFloorButtonDown_pass() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
 
@@ -239,7 +239,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getFloorButtonDown_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getFloorButtonDown_throwsRemoteException() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
         model.setFloorButtonDown(0, true);
@@ -256,7 +256,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getFloorButtonUp_pass() throws RemoteException {
+    void testUpdateModel_getFloorButtonUp_pass() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
 
@@ -272,7 +272,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getFloorButtonUp_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getFloorButtonUp_throwsRemoteException() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
         model.setFloorButtonUp(0, true);
@@ -289,7 +289,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getClockTick_pass() throws RemoteException {
+    void testUpdateModel_getClockTick_pass() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
 
@@ -301,7 +301,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getClockTick_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getClockTick_throwsRemoteException() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
         model.setClockTick(47132);
@@ -314,7 +314,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getServicesFloors_pass() throws RemoteException {
+    void testUpdateModel_getServicesFloors_pass() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
 
@@ -330,7 +330,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getServicesFloors_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getServicesFloors_throwsRemoteException() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
         model.setServicesFloors(0,0, false);
@@ -348,7 +348,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorButton_pass() throws RemoteException {
+    void testUpdateModel_getElevatorButton_pass() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
 
@@ -364,7 +364,7 @@ public class ElevatorModelUpdaterTest {
     }
 
     @Test
-    public void testUpdateModel_getElevatorButton_throwsRemoteException() throws RemoteException {
+    void testUpdateModel_getElevatorButton_throwsRemoteException() throws RemoteException {
         ElevatorModel model = new ElevatorModel(1, 2, 2500);
         ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
         model.setFloorRequestedInElevator(0,0, false);
