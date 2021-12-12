@@ -39,7 +39,6 @@ public class ElevatorModelUpdater {
                 model.setTarget(i, elevatorInterface.getTarget(i));
             } catch(RemoteException e) {
                 System.err.println(e.getMessage());
-                e.printStackTrace();
             }
 
             updateServicedFloors(i);
@@ -52,7 +51,6 @@ public class ElevatorModelUpdater {
                 model.setFloorButtonUp(i, elevatorInterface.getFloorButtonUp(i));
             } catch(RemoteException e) {
                 System.err.println(e.getMessage());
-                e.printStackTrace();
             }
         }
 
@@ -60,7 +58,6 @@ public class ElevatorModelUpdater {
             model.setClockTick(elevatorInterface.getClockTick());
         } catch(RemoteException e) {
             System.err.println(e.getMessage());
-            e.printStackTrace();
         }
 
     }
@@ -72,7 +69,6 @@ public class ElevatorModelUpdater {
                         elevatorInterface.getServicesFloors(elevatorNumber, i));
             } catch(RemoteException e) {
                 System.err.println(e.getMessage());
-                e.printStackTrace();
             }
         }
     }
@@ -84,7 +80,6 @@ public class ElevatorModelUpdater {
                         elevatorInterface.getElevatorButton(elevatorNumber, i));
             } catch (RemoteException e) {
                 System.err.println(e.getMessage());
-                e.printStackTrace();
             }
         }
     }
