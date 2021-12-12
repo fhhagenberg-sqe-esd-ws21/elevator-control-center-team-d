@@ -29,11 +29,7 @@ public class ElevatorModel {
     public ElevatorModel(int numberOfElevators, int numberOfFloors, int floorHeight) {
         elevators = new ArrayList<>();
         for(int i = 0; i < numberOfElevators; ++i) {
-<<<<<<< Updated upstream
-            elevators.add(new Elevator());
-=======
             elevators.add(new Elevator(numberOfFloors));
->>>>>>> Stashed changes
         }
         floors = new ArrayList<>(numberOfFloors);
         for(int i = 0; i < numberOfFloors; ++i) {
@@ -63,13 +59,9 @@ public class ElevatorModel {
 
     /**
      * Provides information if the down button was pressed on a particular floor.
-<<<<<<< Updated upstream
-     * @return True if the down button was pressed on floor, false otherwise.
-=======
      * @param floor Floornumber.
      * @return True if the down button was pressed on floor, false otherwise.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public boolean getFloorButtonDown(int floor) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
@@ -80,13 +72,9 @@ public class ElevatorModel {
 
     /**
      * Provides information if the up button was pressed on a particular floor.
-<<<<<<< Updated upstream
-     * @return True if the up button was pressed on floor, false otherwise.
-=======
      * @param floor Floornumber.
      * @return True if the up button was pressed on floor, false otherwise.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public boolean getFloorButtonUp(int floor) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
@@ -97,13 +85,9 @@ public class ElevatorModel {
 
     /**
      * Provides information if the elevator is going up, down or uncommited.
-<<<<<<< Updated upstream
-     * @return ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
-=======
      * @param elevatorNumber number of the elevator.
      * @return ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getCommittedDirection(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -112,19 +96,6 @@ public class ElevatorModel {
         return elevators.get(elevatorNumber).getCommittedDirection();
     }
 
-<<<<<<< Updated upstream
-
-    // public boolean getServicesFloors(int elevatorNumber, int floor) throws IllegalArgumentException {
-    //     if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
-    //         throw new IllegalArgumentException();
-
-    //     return elevators.get(elevatorNumber).getServicesFloors(floor);
-    // }
-
-    /**
-     * Returns the target floor of the elevator.
-     * @return Target floor number.
-=======
     /**
      * Tells you if the elevator services a given floor.
      * @param elevatorNumber number of the elevator.
@@ -144,7 +115,6 @@ public class ElevatorModel {
      * @param elevatorNumber number of the elevator.
      * @return Target floor number.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getTarget(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -155,13 +125,9 @@ public class ElevatorModel {
     
     /**
      * Provides information about how fast the elevator is going.
-<<<<<<< Updated upstream
-     * @return acceleration in m/s.
-=======
      * @param elevatorNumber number of the elevator.
      * @return acceleration in m/s.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getElevatorAccel(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber >= elevators.size() || elevatorNumber < 0)
@@ -171,21 +137,6 @@ public class ElevatorModel {
     }
     
     /**
-<<<<<<< Updated upstream
-     * Tells you if a certain elevator has requested a certain floor.
-     * @return acceleration in m/s.
-     */
-    // public boolean getFloorRequestedInElevator(int elevatorNumber, int floor) throws IllegalArgumentException {
-    //     if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
-    //         throw new IllegalArgumentException();
-
-    //     return elevators.get(elevatorNumber).getElevatorButton(floor);
-    // }
-    
-    /**
-     * Returns the door status of the elevator.
-     * @return ELEVATOR_DOORS_OPEN, ELEVATOR_DOORS_CLOSED, ELEVATOR_DOORS_OPENING or ELEVATOR_DOORS_CLOSING.
-=======
      * Tells you if a given floor is requested in the elevator
      * @param elevatorNumber number of the elevator.
      * @param floor Floornumber.
@@ -204,7 +155,6 @@ public class ElevatorModel {
      * @param elevatorNumber number of the elevator.
      * @return ELEVATOR_DOORS_OPEN, ELEVATOR_DOORS_CLOSED, ELEVATOR_DOORS_OPENING or ELEVATOR_DOORS_CLOSING.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getElevatorDoorStatus(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -215,13 +165,9 @@ public class ElevatorModel {
     
     /**
      * Returns the floor the elevator is on.
-<<<<<<< Updated upstream
-     * @return floor number that the elevator is on.
-=======
      * @param elevatorNumber number of the elevator.
      * @return floor number that the elevator is on.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getElevatorFloor(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -232,13 +178,9 @@ public class ElevatorModel {
     
     /**
      * Returns the position of the elevator in m.
-<<<<<<< Updated upstream
-     * @return elevator position in m.
-=======
      * @param elevatorNumber number of the elevator.
      * @return elevator position in m.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getElevatorPosition(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber >= elevators.size() || elevatorNumber < 0)
@@ -249,13 +191,9 @@ public class ElevatorModel {
     
     /**
      * Returns the speed of the elevator in m/s.
-<<<<<<< Updated upstream
-     * @return elevator speed.
-=======
      * @param elevatorNumber number of the elevator.
      * @return elevator speed.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getElevatorSpeed(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -266,13 +204,9 @@ public class ElevatorModel {
 
     /**
      * Returns the weight of the elevator in pounds.
-<<<<<<< Updated upstream
-     * @return elevator weight in pounds.
-=======
      * @param elevatorNumber number of the elevator.
      * @return elevator weight in pounds.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getElevatorWeight(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -283,13 +217,9 @@ public class ElevatorModel {
 
     /**
      * Returns the position of the elevator in m.
-<<<<<<< Updated upstream
-     * @return elevator position in m.
-=======
      * @param elevatorNumber number of the elevator.
      * @return elevator position in m.
      * @throws IllegalArgumentException
->>>>>>> Stashed changes
      */
     public int getElevatorCapacity(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber >= elevators.size() || elevatorNumber < 0)
@@ -302,16 +232,12 @@ public class ElevatorModel {
 
     
 
-<<<<<<< Updated upstream
-
-=======
     /**
      * Sets the down button on a particular floor.
      * @param floor Floornumber.
      * @param value True or false.
      * @throws IllegalArgumentException
      */
->>>>>>> Stashed changes
     public void setFloorButtonDown(int floor, boolean value) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
             throw new IllegalArgumentException();
@@ -319,16 +245,12 @@ public class ElevatorModel {
         floors.get(floor).setDownButtonPressed(value);
     }
 
-<<<<<<< Updated upstream
-
-=======
     /**
      * Sets the up button on a particular floor.
      * @param floor Floornumber.
      * @param value True or false.
      * @throws IllegalArgumentException
      */
->>>>>>> Stashed changes
     public void setFloorButtonUp(int floor, boolean value) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
             throw new IllegalArgumentException();
@@ -336,16 +258,12 @@ public class ElevatorModel {
         floors.get(floor).setUpButtonPressed(value);
     }
 
-<<<<<<< Updated upstream
-
-=======
     /**
      * Sets the commited direction on a particular elevator.
      * @param elevatorNumber Elevator number.
      * @param direction ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
      * @throws IllegalArgumentException
      */
->>>>>>> Stashed changes
     public void setCommittedDirection(int elevatorNumber, int direction) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
             throw new IllegalArgumentException();
@@ -353,15 +271,6 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setCommittedDirection(direction);
     }
 
-<<<<<<< Updated upstream
-
-    // public void setServicesFloors(int elevatorNumber, int floor, boolean service) throws IllegalArgumentException {
-    //     if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
-    //         throw new IllegalArgumentException();
-
-    //     elevators.get(elevatorNumber).setServicesFloors(floor, service);
-    // }
-=======
     /**
      * Configure a particualr elevator to service a particular floor.
      * @param elevatorNumber Elevator number.
@@ -375,7 +284,6 @@ public class ElevatorModel {
 
         elevators.get(elevatorNumber).setFloorServiced(floor, service);
     }
->>>>>>> Stashed changes
 
 
     public void setTarget(int elevatorNumber, int target) throws IllegalArgumentException {
@@ -394,21 +302,12 @@ public class ElevatorModel {
     }
 
 
-<<<<<<< Updated upstream
-    // public void setElevatorButton(int elevatorNumber, int floor, boolean value) throws IllegalArgumentException {
-    //     if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
-    //         throw new IllegalArgumentException();
-
-    //     elevators.get(elevatorNumber).setElevatorButton(floor, value);
-    // }
-=======
     public void setFloorRequestedInElevator(int elevatorNumber, int floor, boolean value) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
             throw new IllegalArgumentException();
 
         elevators.get(elevatorNumber).setFloorButton(floor, value);
     }
->>>>>>> Stashed changes
 
 
     public void setElevatorDoorStatus(int elevatorNumber, int doorStatus) throws IllegalArgumentException {
