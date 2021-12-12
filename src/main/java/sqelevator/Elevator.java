@@ -22,6 +22,10 @@ public class Elevator {
     private ArrayList<Boolean> servicedFloors;
     private ArrayList<Boolean> pressedFloorButtons;
     
+    /**
+     * Constructor of Elevator
+     * @param numberOfFloors: how many floors does the building have?
+     */
     public Elevator(int numberOfFloors)
     {
     	committedDirection = 2;
@@ -186,7 +190,7 @@ public class Elevator {
 	/**
 	 * 
 	 * @param floorNum: floor number to be checked
-	 * @return is floor serviced or not
+	 * @param isServiced: boolean to tell wether the floor is serviced or not
 	 */
 	public void setFloorServiced(int floorNum, boolean isServiced)
 	{
@@ -213,7 +217,6 @@ public class Elevator {
 	/**
 	 * 
 	 * @param floorNum: floor number to be checked
-	 * @return is button pressed or not
 	 */
 	public void setFloorButton(int floorNum, boolean isServiced)
 	{
