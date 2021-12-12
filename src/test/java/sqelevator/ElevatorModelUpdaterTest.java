@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Tests class of ElevatorModelUpdater.
- * @author Markus Lindner - s2010567018
+ * Class for creating an Elevator
+ * @author Daniel Herzog (s2010567013@fhooe.at)
  */
 @ExtendWith(MockitoExtension.class)
 class ElevatorModelUpdaterTest {
