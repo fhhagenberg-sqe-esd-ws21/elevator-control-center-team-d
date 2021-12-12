@@ -1,5 +1,7 @@
 # Graphical User Interface with JavaFx
 
+![](elevator_dudes.jpg)
+
 ### Prerequisites
 
 - [x] Java 13 SDK (e.g. Oracle or OpenJDK).
