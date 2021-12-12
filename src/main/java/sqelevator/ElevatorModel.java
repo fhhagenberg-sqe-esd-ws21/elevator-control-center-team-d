@@ -285,7 +285,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setFloorServiced(floor, service);
     }
 
-
+    /**
+     * Commands an elevator to target a specific floor.
+     * @param elevatorNumber number of the elevator.
+     * @param target Number of the floor to be targeted.
+     * @throws IllegalArgumentException
+     */
     public void setTarget(int elevatorNumber, int target) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || target < 0 || target >= floors.size())
             throw new IllegalArgumentException();
@@ -293,7 +298,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setTarget(target);
     }
 
-
+    /**
+     * Sets the elevator acceleration.
+     * @param elevatorNumber number of the elevator.
+     * @param value Acceleration in m/s.
+     * @throws IllegalArgumentException
+     */
     public void setElevatorAccel(int elevatorNumber, int value) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
             throw new IllegalArgumentException();
@@ -301,7 +311,13 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setSpeed(value);
     }
 
-
+    /**
+     * Requests the elevator to stop at a specific floor or to not stop.
+     * @param elevatorNumber number of the elevator.
+     * @param floor Floor number.
+     * @param value True or false.
+     * @throws IllegalArgumentException
+     */
     public void setFloorRequestedInElevator(int elevatorNumber, int floor, boolean value) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
             throw new IllegalArgumentException();
@@ -309,7 +325,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setFloorButton(floor, value);
     }
 
-
+    /**
+     * Sets the door status of the elevator.
+     * @param elevatorNumber number of the elevator.
+     * @param doorStatus ELEVATOR_DOORS_OPEN, ELEVATOR_DOORS_CLOSED, ELEVATOR_DOORS_OPENING or ELEVATOR_DOORS_CLOSING.
+     * @throws IllegalArgumentException
+     */
     public void setElevatorDoorStatus(int elevatorNumber, int doorStatus) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
             throw new IllegalArgumentException();
@@ -317,7 +338,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setDoorStatus(doorStatus);
     }
 
-
+    /**
+     * Sets the floor that the elevator is at.
+     * @param elevatorNumber number of the elevator.
+     * @param floor Floor number.
+     * @throws IllegalArgumentException
+     */
     public void setElevatorFloor(int elevatorNumber, int floor) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
             throw new IllegalArgumentException();
@@ -325,7 +351,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setFloor(floor);
     }
 
-
+    /**
+     * Sets the position that the elevator is at in m above the ground.
+     * @param elevatorNumber number of the elevator.
+     * @param position Position in m above the ground.
+     * @throws IllegalArgumentException
+     */
     public void setElevatorPosition(int elevatorNumber, int position) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
             throw new IllegalArgumentException();
@@ -333,7 +364,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setPosition(position);
     }
 
-
+    /**
+     * Sets the speed of the elevator.
+     * @param elevatorNumber number of the elevator.
+     * @param speed Speed in m/s.
+     * @throws IllegalArgumentException
+     */
     public void setElevatorSpeed(int elevatorNumber, int speed) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
             throw new IllegalArgumentException();
@@ -341,7 +377,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setSpeed(speed);
     }
 
-
+    /**
+     * Sets the weight of the elevator.
+     * @param elevatorNumber number of the elevator.
+     * @param weight Weight in kg.
+     * @throws IllegalArgumentException
+     */
     public void setElevatorWeight(int elevatorNumber, int weight) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
             throw new IllegalArgumentException();
@@ -349,7 +390,12 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setWeight(weight);
     }
 
-
+    /**
+     * Sets the capacity of the elevator.
+     * @param elevatorNumber number of the elevator.
+     * @param capacity Capacity in persons.
+     * @throws IllegalArgumentException
+     */
     public void setElevatorCapacity(int elevatorNumber, int capacity) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
             throw new IllegalArgumentException();
@@ -357,27 +403,42 @@ public class ElevatorModel {
         elevators.get(elevatorNumber).setCapacity(capacity);
     }
 
-    
+    /**
+     * Gets the logging level.
+     * @returns Logging level.
+     */
     public int getLogging() {
         return this.loggingLevel;
     }
     
-
+    /**
+     * Sets the logging level.
+     * @param loggingLevel Logging level.
+     */
     public void setLogging(int loggingLevel) {
         this.loggingLevel = loggingLevel;
     }
 
-    
+    /**
+     * Gets the clock tick of internal clock.
+     * @returns clock tick.
+     */
     public long getClockTick() {
         return this.clockTick;
     }
     
-
+    /**
+     * Sets the clock tick of internal clock.
+     * @param clockTick clock tick.
+     */
     public void setClockTick(long clockTick) {
         this.clockTick = clockTick;
     }
 
-    
+    /**
+     * Gets the floor height in m.
+     * @returns floor height.
+     */
     public int getFloorHeight() {
         return this.floorHeight;
     }
