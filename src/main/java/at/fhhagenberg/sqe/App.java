@@ -29,6 +29,10 @@ public class App extends Application {
         stage.show();
     }
 
+    /**
+     * Let her rip
+     * @param args what do you think it is
+     */
     public static void main(String[] args) {
         launch();
     }
