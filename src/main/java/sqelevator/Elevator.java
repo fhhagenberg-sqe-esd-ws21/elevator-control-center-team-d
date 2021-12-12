@@ -217,6 +217,7 @@ public class Elevator {
 	/**
 	 * 
 	 * @param floorNum: floor number to be checked
+	 * @param isServiced: bool the tell if floor should be serviced
 	 */
 	public void setFloorButton(int floorNum, boolean isServiced)
 	{
