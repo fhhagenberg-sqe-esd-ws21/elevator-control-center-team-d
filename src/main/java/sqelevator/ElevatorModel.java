@@ -61,7 +61,7 @@ public class ElevatorModel {
      * Provides information if the down button was pressed on a particular floor.
      * @param floor Floornumber.
      * @return True if the down button was pressed on floor, false otherwise.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public boolean getFloorButtonDown(int floor) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
@@ -74,7 +74,7 @@ public class ElevatorModel {
      * Provides information if the up button was pressed on a particular floor.
      * @param floor Floornumber.
      * @return True if the up button was pressed on floor, false otherwise.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public boolean getFloorButtonUp(int floor) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
@@ -87,7 +87,7 @@ public class ElevatorModel {
      * Provides information if the elevator is going up, down or uncommited.
      * @param elevatorNumber number of the elevator.
      * @return ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getCommittedDirection(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -101,7 +101,7 @@ public class ElevatorModel {
      * @param elevatorNumber number of the elevator.
      * @param floor Floornumber.
      * @return True if elevator servies the floor, false otherwise.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public boolean getServicesFloors(int elevatorNumber, int floor) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
@@ -114,7 +114,7 @@ public class ElevatorModel {
      * Returns the target floor of the elevator.
      * @param elevatorNumber number of the elevator.
      * @return Target floor number.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getTarget(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -127,7 +127,7 @@ public class ElevatorModel {
      * Provides information about how fast the elevator is going.
      * @param elevatorNumber number of the elevator.
      * @return acceleration in m/s.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getElevatorAccel(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber >= elevators.size() || elevatorNumber < 0)
@@ -141,7 +141,7 @@ public class ElevatorModel {
      * @param elevatorNumber number of the elevator.
      * @param floor Floornumber.
      * @return True if floor is requested, false otherwise.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public boolean getFloorRequestedInElevator(int elevatorNumber, int floor) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
@@ -154,7 +154,7 @@ public class ElevatorModel {
      * Returns the door status of the elevator.
      * @param elevatorNumber number of the elevator.
      * @return ELEVATOR_DOORS_OPEN, ELEVATOR_DOORS_CLOSED, ELEVATOR_DOORS_OPENING or ELEVATOR_DOORS_CLOSING.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getElevatorDoorStatus(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -167,7 +167,7 @@ public class ElevatorModel {
      * Returns the floor the elevator is on.
      * @param elevatorNumber number of the elevator.
      * @return floor number that the elevator is on.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getElevatorFloor(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -180,7 +180,7 @@ public class ElevatorModel {
      * Returns the position of the elevator in m.
      * @param elevatorNumber number of the elevator.
      * @return elevator position in m.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getElevatorPosition(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber >= elevators.size() || elevatorNumber < 0)
@@ -193,7 +193,7 @@ public class ElevatorModel {
      * Returns the speed of the elevator in m/s.
      * @param elevatorNumber number of the elevator.
      * @return elevator speed.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getElevatorSpeed(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -206,7 +206,7 @@ public class ElevatorModel {
      * Returns the weight of the elevator in pounds.
      * @param elevatorNumber number of the elevator.
      * @return elevator weight in pounds.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getElevatorWeight(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -219,7 +219,7 @@ public class ElevatorModel {
      * Returns the position of the elevator in m.
      * @param elevatorNumber number of the elevator.
      * @return elevator position in m.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public int getElevatorCapacity(int elevatorNumber) throws IllegalArgumentException {
         if(elevatorNumber >= elevators.size() || elevatorNumber < 0)
@@ -236,7 +236,7 @@ public class ElevatorModel {
      * Sets the down button on a particular floor.
      * @param floor Floornumber.
      * @param value True or false.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setFloorButtonDown(int floor, boolean value) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
@@ -249,7 +249,7 @@ public class ElevatorModel {
      * Sets the up button on a particular floor.
      * @param floor Floornumber.
      * @param value True or false.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setFloorButtonUp(int floor, boolean value) throws IllegalArgumentException {
         if(floor < 0 || floor >= floors.size())
@@ -262,7 +262,7 @@ public class ElevatorModel {
      * Sets the commited direction on a particular elevator.
      * @param elevatorNumber Elevator number.
      * @param direction ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setCommittedDirection(int elevatorNumber, int direction) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -276,7 +276,7 @@ public class ElevatorModel {
      * @param elevatorNumber Elevator number.
      * @param floor Floor number.
      * @param service True or false.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setServicesFloors(int elevatorNumber, int floor, boolean service) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
@@ -289,7 +289,7 @@ public class ElevatorModel {
      * Commands an elevator to target a specific floor.
      * @param elevatorNumber number of the elevator.
      * @param target Number of the floor to be targeted.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setTarget(int elevatorNumber, int target) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || target < 0 || target >= floors.size())
@@ -302,7 +302,7 @@ public class ElevatorModel {
      * Sets the elevator acceleration.
      * @param elevatorNumber number of the elevator.
      * @param value Acceleration in m/s.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setElevatorAccel(int elevatorNumber, int value) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -316,7 +316,7 @@ public class ElevatorModel {
      * @param elevatorNumber number of the elevator.
      * @param floor Floor number.
      * @param value True or false.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setFloorRequestedInElevator(int elevatorNumber, int floor, boolean value) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
@@ -329,7 +329,7 @@ public class ElevatorModel {
      * Sets the door status of the elevator.
      * @param elevatorNumber number of the elevator.
      * @param doorStatus ELEVATOR_DOORS_OPEN, ELEVATOR_DOORS_CLOSED, ELEVATOR_DOORS_OPENING or ELEVATOR_DOORS_CLOSING.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setElevatorDoorStatus(int elevatorNumber, int doorStatus) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -342,7 +342,7 @@ public class ElevatorModel {
      * Sets the floor that the elevator is at.
      * @param elevatorNumber number of the elevator.
      * @param floor Floor number.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setElevatorFloor(int elevatorNumber, int floor) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size() || floor < 0 || floor >= floors.size())
@@ -355,7 +355,7 @@ public class ElevatorModel {
      * Sets the position that the elevator is at in m above the ground.
      * @param elevatorNumber number of the elevator.
      * @param position Position in m above the ground.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setElevatorPosition(int elevatorNumber, int position) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -368,7 +368,7 @@ public class ElevatorModel {
      * Sets the speed of the elevator.
      * @param elevatorNumber number of the elevator.
      * @param speed Speed in m/s.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setElevatorSpeed(int elevatorNumber, int speed) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -381,7 +381,7 @@ public class ElevatorModel {
      * Sets the weight of the elevator.
      * @param elevatorNumber number of the elevator.
      * @param weight Weight in kg.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setElevatorWeight(int elevatorNumber, int weight) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
@@ -394,7 +394,7 @@ public class ElevatorModel {
      * Sets the capacity of the elevator.
      * @param elevatorNumber number of the elevator.
      * @param capacity Capacity in persons.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when shit fails
      */
     public void setElevatorCapacity(int elevatorNumber, int capacity) throws IllegalArgumentException {
         if(elevatorNumber < 0 || elevatorNumber >= elevators.size())
