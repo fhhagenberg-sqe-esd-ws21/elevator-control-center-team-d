@@ -1,5 +1,7 @@
 package sqelevator;
 
+import java.util.ArrayList;
+
 /**
  * Datamodel for the Elevator
  * @author Florian
@@ -17,8 +19,10 @@ public class Elevator {
     private int weight;
     private int capacity;
     private int target;
+    private ArrayList<Boolean> servicedFloors;
+    private ArrayList<Boolean> pressedFloorButtons;
     
-    public Elevator()
+    public Elevator(int numberOfFloors)
     {
     	committedDirection = 2;
     	setAccel(0);
@@ -29,6 +33,14 @@ public class Elevator {
     	setWeight(0);
     	setCapacity(1);
     	target = 0;
+    	servicedFloors = new ArrayList<Boolean>();
+    	pressedFloorButtons = new ArrayList<Boolean>();
+    	
+    	for(int i = 0; i < numberOfFloors; i++)
+    	{
+    		servicedFloors.add(true);
+    		pressedFloorButtons.add(false);
+    	}
     }
 
 	/**
@@ -155,6 +167,60 @@ public class Elevator {
 	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	
+	/**
+	 * 
+	 * @param floorNum: floor number to be checked
+	 * @return is floor serviced or not
+	 */
+	public boolean isFloorServiced(int floorNum)
+	{
+		if(floorNum <= servicedFloors.size())
+		{
+			return servicedFloors.get(floorNum);
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param floorNum: floor number to be checked
+	 * @return is floor serviced or not
+	 */
+	public void setFloorServiced(int floorNum, boolean isServiced)
+	{
+		if(floorNum <= servicedFloors.size())
+		{
+			servicedFloors.set(floorNum, isServiced);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param floorNum: floor number to be checked
+	 * @return is button pressed or not
+	 */
+	public boolean isFloorButtonPressed(int floorNum)
+	{
+		if(floorNum <= pressedFloorButtons.size())
+		{
+			return pressedFloorButtons.get(floorNum);
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param floorNum: floor number to be checked
+	 * @return is button pressed or not
+	 */
+	public void setFloorButton(int floorNum, boolean isServiced)
+	{
+		if(floorNum <= pressedFloorButtons.size())
+		{
+			pressedFloorButtons.set(floorNum, isServiced);
+		}
 	}
 	
 }
