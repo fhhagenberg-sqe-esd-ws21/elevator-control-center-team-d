@@ -405,7 +405,7 @@ public class ElevatorModel {
 
     /**
      * Gets the logging level.
-     * @returns Logging level.
+     * @return Logging level.
      */
     public int getLogging() {
         return this.loggingLevel;
@@ -421,7 +421,7 @@ public class ElevatorModel {
 
     /**
      * Gets the clock tick of internal clock.
-     * @returns clock tick.
+     * @return clock tick.
      */
     public long getClockTick() {
         return this.clockTick;
@@ -437,7 +437,7 @@ public class ElevatorModel {
 
     /**
      * Gets the floor height in m.
-     * @returns floor height.
+     * @return floor height.
      */
     public int getFloorHeight() {
         return this.floorHeight;
