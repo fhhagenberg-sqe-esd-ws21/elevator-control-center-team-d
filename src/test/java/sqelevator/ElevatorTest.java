@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import at.fhhagenberg.sqe.Elevator;
-
 class ElevatorTest {
 	@Test
 	void TestCommitedDirection()
