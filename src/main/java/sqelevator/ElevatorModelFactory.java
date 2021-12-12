@@ -20,8 +20,8 @@ public class ElevatorModelFactory {
 
     /**
      * Creates a Elevator
-     * @return
-     * @throws RemoteException
+     * @return new Elevator
+     * @throws RemoteException Exception if something goes wrong
      */
     public ElevatorModel createElevatorControlCenter() throws RemoteException {
         return new ElevatorModel(elevatorInterface.getElevatorNum(), elevatorInterface.getFloorNum(), elevatorInterface.getFloorHeight());
