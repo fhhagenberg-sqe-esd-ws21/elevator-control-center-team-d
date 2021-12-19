@@ -8,13 +8,13 @@ import java.rmi.RemoteException;
  */
 public class ECCFactory {
 
-    IElevator elevatorInterface;
+    RmiWrapper elevatorInterface;
 
     /**
      * Constructor
      * @param elevatorInterface Interface of Elevator
      */
-    public ECCFactory(IElevator elevatorInterface) {
+    public ECCFactory(RmiWrapper elevatorInterface) {
         if(elevatorInterface == null)
             throw new IllegalArgumentException("IElevator must not be null.");
 
@@ -22,8 +22,8 @@ public class ECCFactory {
     }
 
     /**
-     * Creates a Elevator
-     * @return new Elevator
+     * Creates an ECCDataModel
+     * @return new ECCDataModel
      * @throws RemoteException Exception if something goes wrong
      */
     public ECCDataModel createElevatorControlCenter() throws RemoteException {

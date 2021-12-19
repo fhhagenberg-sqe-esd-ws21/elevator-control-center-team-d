@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 public class ECCFactoryTest {
 
     @Mock
-    private IElevator mockedInterface = mock(IElevator.class);
+    private RmiWrapper mockedInterface = mock(RmiWrapper.class);
 
     ECCFactory fac;
 

@@ -8,7 +8,7 @@ public class RmiWrapper implements IRmiWrapper{
 	private final IElevator mRmiInterface;
 	private final int mNrOfElevators;
 	private final int mNrOfFloors;
-	
+
 	public RmiWrapper(IElevator rmiInterface) throws RemoteException {
 		if (rmiInterface == null) {
 			throw new IllegalArgumentException("IElevator must not be null");
@@ -40,7 +40,7 @@ public class RmiWrapper implements IRmiWrapper{
 			case IElevator.ELEVATOR_DIRECTION_UP -> ElevatorDirection.Up;
 			case IElevator.ELEVATOR_DIRECTION_DOWN -> ElevatorDirection.Down;
 			case IElevator.ELEVATOR_DIRECTION_UNCOMMITTED -> ElevatorDirection.Uncommitted;
-			default -> throw new IllegalArgumentException("Invalid Elevator direction");
+			default -> throw new IllegalArgumentException("Invalid Elevator direction " + direction);
 		};
 	}
 
@@ -62,13 +62,15 @@ public class RmiWrapper implements IRmiWrapper{
 		checkElevatorNumber(elevatorNumber);
 		
 		int door = mRmiInterface.getElevatorDoorStatus(elevatorNumber);
-		return switch (door) {
+
+		ElevatorDoorStatus status = switch (door) {
 			case IElevator.ELEVATOR_DOORS_OPEN -> ElevatorDoorStatus.Open;
 			case IElevator.ELEVATOR_DOORS_CLOSED -> ElevatorDoorStatus.Closed;
 			case IElevator.ELEVATOR_DOORS_OPENING -> ElevatorDoorStatus.Opening;
 			case IElevator.ELEVATOR_DOORS_CLOSING -> ElevatorDoorStatus.Closing;
-			default -> throw new IllegalArgumentException("Invalid Elevator door status");
+			default -> throw new IllegalArgumentException("Invalid Elevator door status " + door);
 		};
+		return status;
 	}
 
 	@Override

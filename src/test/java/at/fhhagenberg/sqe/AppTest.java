@@ -1,5 +1,6 @@
 package at.fhhagenberg.sqe;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxAssert;
@@ -11,6 +12,7 @@ import org.testfx.matcher.control.LabeledMatchers;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
+@Disabled
 public class AppTest {
     /**
      * Will be called with {@code @Before} semantics, i. e. before each test method.
