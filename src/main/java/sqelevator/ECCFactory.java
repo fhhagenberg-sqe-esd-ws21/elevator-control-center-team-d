@@ -15,6 +15,9 @@ public class ECCFactory {
      * @param elevatorInterface Interface of Elevator
      */
     public ECCFactory(IElevator elevatorInterface) {
+        if(elevatorInterface == null)
+            throw new IllegalArgumentException("IElevator must not be null.");
+
         this.elevatorInterface = elevatorInterface;
     }
 
