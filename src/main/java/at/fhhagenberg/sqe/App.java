@@ -12,6 +12,10 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
+    // Hier: ECCManager instanzieren
+    // Layout-Klasse anlegen, die die GUI aufbaut und Manager mitgeben
+    // Manager erzeugt ElevatorModel, Updater, ... und hier geben wir es an die GUI
+
     @Override
     public void start(Stage stage) {
         var javaVersion = SystemInfo.javaVersion();
@@ -34,7 +38,7 @@ public class App extends Application {
      * @param args what do you think it is
      */
     public static void main(String[] args) {
-        launch();
+        Application.launch();
     }
 
 }

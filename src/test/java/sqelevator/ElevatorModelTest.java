@@ -3,6 +3,7 @@ package sqelevator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,24 +16,31 @@ public class ElevatorModelTest {
     final int nFloors = 10;
     final int floorHeight = 2;
 	
-	ElevatorModel model = new ElevatorModel(nElevators, nFloors, floorHeight);
+	ECCDataModel model;
+	
+	// = new ElevatorModel(nElevators, nFloors, floorHeight);
+
+	@BeforeEach
+	void setup() {
+		model = new ECCDataModel(5, 10, 2);
+	}
 
 	@Test
 	void testElevatorModel_GetNumOfElevators()
 	{
-		assertEquals(nElevators, model.getNumOfElevators());
+		assertEquals(5, model.getNumOfElevators());
 	}
 	
 	@Test
 	void testElevatorModel_GetNumOfFloors()
 	{
-		assertEquals(nFloors, model.getNumOfFloors());
+		assertEquals(10, model.getNumOfFloors());
 	}
 	
 	@Test
 	void testElevatorModel_GetFloorHeight()
 	{
-		assertEquals(floorHeight, model.getFloorHeight());
+		assertEquals(2, model.getFloorHeight());
 	}
 	
 	@Test

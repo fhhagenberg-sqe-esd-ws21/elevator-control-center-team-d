@@ -16,11 +16,11 @@ public class ElevatorModelFactoryTest {
     @Mock
     private IElevator mockedInterface = mock(IElevator.class);
 
-    ElevatorModelFactory factory = new ElevatorModelFactory(mockedInterface);
+    ECCFactory factory = new ECCFactory(mockedInterface);
 
     @Test
     void testCreateSucessfull() throws RemoteException{
-        ElevatorModel model = factory.createElevatorControlCenter();
+        ECCDataModel model = factory.createElevatorControlCenter();
         assertNotNull(model);
     }
 }

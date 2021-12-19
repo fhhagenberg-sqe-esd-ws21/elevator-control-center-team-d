@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
  * Class for creating an Elevator
  * @author Daniel Herzog (s2010567013@fhooe.at)
  */
-public class ElevatorModelFactory {
+public class ECCFactory {
 
     IElevator elevatorInterface;
 
@@ -14,7 +14,7 @@ public class ElevatorModelFactory {
      * Constructor
      * @param elevatorInterface Interface of Elevator
      */
-    public ElevatorModelFactory(IElevator elevatorInterface) {
+    public ECCFactory(IElevator elevatorInterface) {
         this.elevatorInterface = elevatorInterface;
     }
 
@@ -23,7 +23,7 @@ public class ElevatorModelFactory {
      * @return new Elevator
      * @throws RemoteException Exception if something goes wrong
      */
-    public ElevatorModel createElevatorControlCenter() throws RemoteException {
-        return new ElevatorModel(elevatorInterface.getElevatorNum(), elevatorInterface.getFloorNum(), elevatorInterface.getFloorHeight());
+    public ECCDataModel createElevatorControlCenter() throws RemoteException {
+        return new ECCDataModel(elevatorInterface.getElevatorNum(), elevatorInterface.getFloorNum(), elevatorInterface.getFloorHeight());
     }
 }

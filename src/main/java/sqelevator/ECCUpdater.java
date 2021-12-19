@@ -6,17 +6,17 @@ import java.rmi.RemoteException;
  * Class to handle cyclic updates of low level elevator system.
  * @author Daniel Herzog (s2010567013@fhooe.at)
  */
-public class ElevatorModelUpdater {
+public class ECCUpdater {
 
     IElevator elevatorInterface;
-    ElevatorModel model;
+    ECCDataModel model;
 
     /**
      * Constructor of the class.
      * @param elevatorInterface Interface to communicate with elevator system.
      * @param model Model used to store the information
      */
-    public ElevatorModelUpdater(IElevator elevatorInterface, ElevatorModel model) {
+    public ECCUpdater(IElevator elevatorInterface, ECCDataModel model) {
         this.elevatorInterface = elevatorInterface;
         this.model = model;
     }

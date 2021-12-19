@@ -23,8 +23,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_committedDirection_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getCommittedDirection(elevatorNumber)).thenReturn(IElevator.ELEVATOR_DIRECTION_UNCOMMITTED);
         updater.updateModel();
@@ -36,8 +36,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorAccel_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setElevatorAccel(elevatorNumber, 12345);
 
         when(mockedInterface.getElevatorAccel(elevatorNumber)).thenThrow(RemoteException.class);
@@ -50,8 +50,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorDoorStatus_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getElevatorDoorStatus(elevatorNumber)).thenReturn(IElevator.ELEVATOR_DOORS_OPENING);
         updater.updateModel();
@@ -63,8 +63,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorDoorStatus_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setElevatorDoorStatus(elevatorNumber, IElevator.ELEVATOR_DOORS_CLOSED);
 
         when(mockedInterface.getElevatorDoorStatus(elevatorNumber)).thenThrow(RemoteException.class);
@@ -77,8 +77,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorFloor_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getElevatorFloor(elevatorNumber)).thenReturn(9);
         updater.updateModel();
@@ -90,8 +90,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorFloor_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setElevatorFloor(elevatorNumber, 9);
 
         when(mockedInterface.getElevatorFloor(elevatorNumber)).thenThrow(RemoteException.class);
@@ -104,8 +104,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorPosition_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getElevatorPosition(elevatorNumber)).thenReturn(4712);
         updater.updateModel();
@@ -117,8 +117,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorPosition_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setElevatorPosition(elevatorNumber, 4712);
 
         when(mockedInterface.getElevatorPosition(elevatorNumber)).thenThrow(RemoteException.class);
@@ -131,8 +131,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorSpeed_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getElevatorSpeed(elevatorNumber)).thenReturn(987);
         updater.updateModel();
@@ -144,8 +144,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorWeight_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getElevatorWeight(elevatorNumber)).thenReturn(1234);
         updater.updateModel();
@@ -157,8 +157,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorWeight_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setElevatorWeight(elevatorNumber, 1234);
 
         when(mockedInterface.getElevatorWeight(elevatorNumber)).thenThrow(RemoteException.class);
@@ -171,8 +171,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorCapacity_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getElevatorCapacity(elevatorNumber)).thenReturn(1024);
         updater.updateModel();
@@ -184,8 +184,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getElevatorCapacity_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setElevatorCapacity(elevatorNumber, 1025);
 
         when(mockedInterface.getElevatorCapacity(elevatorNumber)).thenThrow(RemoteException.class);
@@ -198,8 +198,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getTarget_pass() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getTarget(elevatorNumber)).thenReturn(3);
         updater.updateModel();
@@ -211,8 +211,8 @@ class ElevatorModelUpdaterTest {
     @Test
     void testUpdateModel_getTarget_throwsRemoteException() throws RemoteException {
         int elevatorNumber = 0;
-        ElevatorModel model = new ElevatorModel(1, 10, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 10, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setTarget(elevatorNumber, 4);
 
         when(mockedInterface.getTarget(elevatorNumber)).thenThrow(RemoteException.class);
@@ -224,8 +224,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getFloorButtonDown_pass() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getFloorButtonDown(0)).thenReturn(true);
         when(mockedInterface.getFloorButtonDown(1)).thenReturn(false);
@@ -240,8 +240,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getFloorButtonDown_throwsRemoteException() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setFloorButtonDown(0, true);
 
         when(mockedInterface.getFloorButtonDown(0)).thenThrow(RemoteException.class);
@@ -257,8 +257,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getFloorButtonUp_pass() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getFloorButtonUp(0)).thenReturn(true);
         when(mockedInterface.getFloorButtonUp(1)).thenReturn(false);
@@ -273,8 +273,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getFloorButtonUp_throwsRemoteException() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setFloorButtonUp(0, true);
 
         when(mockedInterface.getFloorButtonUp(0)).thenThrow(RemoteException.class);
@@ -290,8 +290,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getClockTick_pass() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getClockTick()).thenReturn(Integer.toUnsignedLong(47123));
         updater.updateModel();
@@ -302,8 +302,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getClockTick_throwsRemoteException() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setClockTick(47132);
 
         when(mockedInterface.getClockTick()).thenThrow(RemoteException.class);
@@ -315,8 +315,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getServicesFloors_pass() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getServicesFloors(0,0)).thenReturn(true);
         when(mockedInterface.getServicesFloors(0,1)).thenReturn(false);
@@ -331,8 +331,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getServicesFloors_throwsRemoteException() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setServicesFloors(0,0, false);
         model.setServicesFloors(0,1, true);
 
@@ -349,8 +349,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getElevatorButton_pass() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
 
         when(mockedInterface.getElevatorButton(0,0)).thenReturn(true);
         when(mockedInterface.getElevatorButton(0,1)).thenReturn(false);
@@ -365,8 +365,8 @@ class ElevatorModelUpdaterTest {
 
     @Test
     void testUpdateModel_getElevatorButton_throwsRemoteException() throws RemoteException {
-        ElevatorModel model = new ElevatorModel(1, 2, 2500);
-        ElevatorModelUpdater updater = new ElevatorModelUpdater(mockedInterface, model);
+        ECCDataModel model = new ECCDataModel(1, 2, 2500);
+        ECCUpdater updater = new ECCUpdater(mockedInterface, model);
         model.setFloorRequestedInElevator(0,0, false);
         model.setFloorRequestedInElevator(0,1, true);
 
