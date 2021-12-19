@@ -37,9 +37,9 @@ public class RmiWrapper implements IRmiWrapper{
 		
 		int direction = mRmiInterface.getCommittedDirection(elevatorNumber);
 		return switch (direction) {
-			case IElevator.ELEVATOR_DIRECTION_UP -> ElevatorDirection.Up;
-			case IElevator.ELEVATOR_DIRECTION_DOWN -> ElevatorDirection.Down;
-			case IElevator.ELEVATOR_DIRECTION_UNCOMMITTED -> ElevatorDirection.Uncommitted;
+			case IElevator.ELEVATOR_DIRECTION_UP -> ElevatorDirection.UP;
+			case IElevator.ELEVATOR_DIRECTION_DOWN -> ElevatorDirection.DOWN;
+			case IElevator.ELEVATOR_DIRECTION_UNCOMMITTED -> ElevatorDirection.UNCOMMITTED;
 			default -> throw new IllegalArgumentException("Invalid Elevator direction " + direction);
 		};
 	}
@@ -63,14 +63,13 @@ public class RmiWrapper implements IRmiWrapper{
 		
 		int door = mRmiInterface.getElevatorDoorStatus(elevatorNumber);
 
-		ElevatorDoorStatus status = switch (door) {
-			case IElevator.ELEVATOR_DOORS_OPEN -> ElevatorDoorStatus.Open;
-			case IElevator.ELEVATOR_DOORS_CLOSED -> ElevatorDoorStatus.Closed;
-			case IElevator.ELEVATOR_DOORS_OPENING -> ElevatorDoorStatus.Opening;
-			case IElevator.ELEVATOR_DOORS_CLOSING -> ElevatorDoorStatus.Closing;
+		return switch (door) {
+			case IElevator.ELEVATOR_DOORS_OPEN -> ElevatorDoorStatus.OPEN;
+			case IElevator.ELEVATOR_DOORS_CLOSED -> ElevatorDoorStatus.CLOSED;
+			case IElevator.ELEVATOR_DOORS_OPENING -> ElevatorDoorStatus.OPENING;
+			case IElevator.ELEVATOR_DOORS_CLOSING -> ElevatorDoorStatus.CLOSING;
 			default -> throw new IllegalArgumentException("Invalid Elevator door status " + door);
 		};
-		return status;
 	}
 
 	@Override
@@ -148,9 +147,9 @@ public class RmiWrapper implements IRmiWrapper{
 		checkElevatorNumber(elevatorNumber);
 		
 		int d = switch (direction) {
-			case Up -> IElevator.ELEVATOR_DIRECTION_UP;
-			case Down -> IElevator.ELEVATOR_DIRECTION_DOWN;
-			case Uncommitted -> IElevator.ELEVATOR_DIRECTION_UNCOMMITTED;
+			case UP -> IElevator.ELEVATOR_DIRECTION_UP;
+			case DOWN -> IElevator.ELEVATOR_DIRECTION_DOWN;
+			case UNCOMMITTED -> IElevator.ELEVATOR_DIRECTION_UNCOMMITTED;
 			default -> throw new IllegalArgumentException("Invalid ElevatorDirection");
 		};
 

@@ -42,8 +42,8 @@ class ECCUpdaterTest {
 
 		assertEquals(5, model.getNumOfElevators());
 		assertEquals(10, model.getNumOfFloors());
-		assertEquals(ElevatorDirection.Uncommitted, e.getCommittedDirection());
-		assertEquals(ElevatorDoorStatus.Closed, e.getDoorStatus());
+		assertEquals(ElevatorDirection.UNCOMMITTED, e.getCommittedDirection());
+		assertEquals(ElevatorDoorStatus.CLOSED, e.getDoorStatus());
 		assertEquals(5, e.getTarget());
 	}
 
@@ -64,15 +64,15 @@ class ECCUpdaterTest {
         updater.updateModel();
 		Elevator e = model.getElevator(0);
 
-        assertEquals(ElevatorDirection.Up, e.getCommittedDirection());
-		assertEquals(ElevatorDoorStatus.Open, e.getDoorStatus());
+        assertEquals(ElevatorDirection.UP, e.getCommittedDirection());
+		assertEquals(ElevatorDoorStatus.OPEN, e.getDoorStatus());
 
         when(mockedInterface.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_DOWN);
 		when(mockedInterface.getElevatorDoorStatus(0)).thenReturn(IElevator.ELEVATOR_DOORS_CLOSING);
         updater.updateModel();
 
-        assertEquals(ElevatorDirection.Down, e.getCommittedDirection());
-		assertEquals(ElevatorDoorStatus.Closing, e.getDoorStatus());
+        assertEquals(ElevatorDirection.DOWN, e.getCommittedDirection());
+		assertEquals(ElevatorDoorStatus.CLOSING, e.getDoorStatus());
 	}
 
     // @Test

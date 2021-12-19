@@ -19,10 +19,10 @@ public class Elevator {
 	 * Closing - Door are closing
 	 */
 	public enum ElevatorDoorStatus {
-		Open, 
-		Closed, 
-		Opening,
-		Closing
+		OPEN, 
+		CLOSED, 
+		OPENING,
+		CLOSING
 	}
 
 	/**
@@ -32,9 +32,9 @@ public class Elevator {
 	 * Uncommitted - Elevator is currently not moving
 	 */
 	public enum ElevatorDirection {
-		Up, 
-		Down, 
-		Uncommitted
+		UP, 
+		DOWN, 
+		UNCOMMITTED
 	}
 
 	private final int mNrOfFloors;
@@ -57,8 +57,8 @@ public class Elevator {
     public Elevator(int numberOfFloors)
     {
 		mNrOfFloors = numberOfFloors;
-    	setCommittedDirection(ElevatorDirection.Uncommitted);
-    	setDoorStatus(ElevatorDoorStatus.Closed);
+    	setCommittedDirection(ElevatorDirection.UNCOMMITTED);
+    	setDoorStatus(ElevatorDoorStatus.CLOSED);
     	setAccel(0);
     	setFloor(0);
     	setPosition(0);

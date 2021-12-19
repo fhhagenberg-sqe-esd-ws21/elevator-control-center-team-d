@@ -23,10 +23,10 @@ class ElevatorTest {
 	@Test
 	void TestCommitedDirection()
 	{
-		assertEquals(ElevatorDirection.Uncommitted, e.getCommittedDirection());
+		assertEquals(ElevatorDirection.UNCOMMITTED, e.getCommittedDirection());
 		
-		e.setCommittedDirection(ElevatorDirection.Up);
-		assertEquals(ElevatorDirection.Up, e.getCommittedDirection());
+		e.setCommittedDirection(ElevatorDirection.UP);
+		assertEquals(ElevatorDirection.UP, e.getCommittedDirection());
 	}
 	
 	@Test
@@ -50,10 +50,10 @@ class ElevatorTest {
 	@Test
 	void TestDoorStatus()
 	{
-		assertEquals(ElevatorDoorStatus.Closed, e.getDoorStatus());
+		assertEquals(ElevatorDoorStatus.CLOSED, e.getDoorStatus());
 		
-		e.setDoorStatus(ElevatorDoorStatus.Opening);
-		assertEquals(ElevatorDoorStatus.Opening, e.getDoorStatus());
+		e.setDoorStatus(ElevatorDoorStatus.OPENING);
+		assertEquals(ElevatorDoorStatus.OPENING, e.getDoorStatus());
 	}
 	
 	@Test
@@ -128,6 +128,78 @@ class ElevatorTest {
 		
 		assertThrows(IllegalArgumentException.class,() -> {e.setStopButton(10, false);});
 		assertThrows(IllegalArgumentException.class,() -> {e.isStopButtonPressed(10);});
+	}
+
+	@Test
+	void TestSetStopButtonThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setStopButton(-100, false);});
+		assertThrows(IllegalArgumentException.class,() -> {e.setStopButton(100, false);});
+	}
+
+	@Test
+	void TestIsStopButtonPressedThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.isStopButtonPressed(-100);});
+		assertThrows(IllegalArgumentException.class,() -> {e.isStopButtonPressed(100);});
+	}
+
+	@Test
+	void TestSetFloorServicedThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setFloorServiced(-100, false);});
+		assertThrows(IllegalArgumentException.class,() -> {e.setFloorServiced(100, false);});
+	}
+
+	@Test
+	void TestIsFloorServicedThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.isFloorServiced(-100);});
+		assertThrows(IllegalArgumentException.class,() -> {e.isFloorServiced(100);});
+	}
+
+	@Test
+	void TestSetWeightThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setWeight(-100);});
+	}
+
+	@Test
+	void TestSetCapacityThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setCapacity(-100);});
+	}
+
+	@Test
+	void TestSetSpeedThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setSpeed(-100);});
+	}
+
+	@Test
+	void TestSetPositionThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setPosition(-100);});
+	}
+
+	@Test
+	void TestSetAccelThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setAccel(-100);});
+	}
+
+	@Test
+	void TestSetFloorThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setFloor(-100);});
+		assertThrows(IllegalArgumentException.class,() -> {e.setFloor(100);});
+	}
+
+	@Test
+	void TestSetTargetThrows()
+	{		
+		assertThrows(IllegalArgumentException.class,() -> {e.setTarget(-100);});
+		assertThrows(IllegalArgumentException.class,() -> {e.setTarget(100);});
 	}
 	
 }
