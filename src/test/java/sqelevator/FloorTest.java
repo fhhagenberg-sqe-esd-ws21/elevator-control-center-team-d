@@ -12,7 +12,6 @@ public class FloorTest {
 		Floor f = new Floor();
 		assertFalse(f.isDownButtonPressed());
 		assertFalse(f.isUpButtonPressed());
-		assertTrue(f.isServiced());
 	}
 	
 	@Test
@@ -37,17 +36,5 @@ public class FloorTest {
 		
 		f.setUpButtonPressed(false);
 		assertFalse(f.isUpButtonPressed());
-	}
-	
-	@Test
-	void TestServced()
-	{
-		Floor f = new Floor();
-		
-		f.setServiced(false);
-		assertFalse(f.isServiced());
-		
-		f.setServiced(true);
-		assertTrue(f.isServiced());
 	}
 }

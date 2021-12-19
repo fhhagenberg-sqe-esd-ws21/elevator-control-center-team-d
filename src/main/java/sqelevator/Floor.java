@@ -9,7 +9,6 @@ package sqelevator;
 public class Floor {
 	private boolean upButtonPressed;
 	private boolean downButtonPressed;
-	private boolean isServiced;
 	
 	/**
 	 * Constructor of Floor Class
@@ -19,12 +18,12 @@ public class Floor {
 	{
 		setUpButtonPressed(false);
 		setDownButtonPressed(false);
-		setServiced(true);
 	}
 
 	/**
-	 * @return the downButtonPressed
-	 */
+     * Provides information if the down button was pressed on a particular floor.
+     * @return True if the down button was pressed on floor, false otherwise.
+     */
 	public boolean isDownButtonPressed() {
 		return downButtonPressed;
 	}
@@ -37,8 +36,9 @@ public class Floor {
 	}
 
 	/**
-	 * @return the upButtonPressed
-	 */
+     * Provides information if the up button was pressed on a particular floor.
+     * @return True if the up button was pressed on floor, false otherwise.
+     */
 	public boolean isUpButtonPressed() {
 		return upButtonPressed;
 	}
@@ -48,19 +48,5 @@ public class Floor {
 	 */
 	public void setUpButtonPressed(boolean upButtonPressed) {
 		this.upButtonPressed = upButtonPressed;
-	}
-
-	/**
-	 * @return the isServiced
-	 */
-	public boolean isServiced() {
-		return isServiced;
-	}
-
-	/**
-	 * @param isServiced the isServiced to set
-	 */
-	public void setServiced(boolean isServiced) {
-		this.isServiced = isServiced;
 	}
 }
