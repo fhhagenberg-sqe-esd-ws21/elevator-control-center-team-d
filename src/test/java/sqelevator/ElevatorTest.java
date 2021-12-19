@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import sqelevator.Elevator.ElevatorDirection;
+import sqelevator.Elevator.ElevatorDoorStatus;
+
 class ElevatorTest {
 	Elevator e;
 
@@ -20,10 +23,10 @@ class ElevatorTest {
 	@Test
 	void TestCommitedDirection()
 	{
-		assertEquals(2, e.getCommittedDirection());
+		assertEquals(ElevatorDirection.Uncommitted, e.getCommittedDirection());
 		
-		e.setCommittedDirection(1);
-		assertEquals(1, e.getCommittedDirection());
+		e.setCommittedDirection(ElevatorDirection.Up);
+		assertEquals(ElevatorDirection.Up, e.getCommittedDirection());
 	}
 	
 	@Test
@@ -47,10 +50,10 @@ class ElevatorTest {
 	@Test
 	void TestDoorStatus()
 	{
-		assertEquals(2, e.getDoorStatus());
+		assertEquals(ElevatorDoorStatus.Closed, e.getDoorStatus());
 		
-		e.setDoorStatus(1);
-		assertEquals(1, e.getDoorStatus());
+		e.setDoorStatus(ElevatorDoorStatus.Opening);
+		assertEquals(ElevatorDoorStatus.Opening, e.getDoorStatus());
 	}
 	
 	@Test

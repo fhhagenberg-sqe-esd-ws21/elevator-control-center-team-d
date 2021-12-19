@@ -11,10 +11,36 @@ import sqelevator.IElevator;
 
 public class Elevator {
 
+	/**
+	 * Enum wrapper for elevator door status.
+	 * Open    - Doors are open
+	 * Closed  - Doors are closed
+	 * Opening - Door are opening
+	 * Closing - Door are closing
+	 */
+	public enum ElevatorDoorStatus {
+		Open, 
+		Closed, 
+		Opening,
+		Closing
+	}
+
+	/**
+	 * Enum wrapper for elevator direction status.
+	 * Up          - Elevator is moving up
+	 * Down        - Elevator is moving down
+	 * Uncommitted - Elevator is currently not moving
+	 */
+	public enum ElevatorDirection {
+		Up, 
+		Down, 
+		Uncommitted
+	}
+
 	private final int mNrOfFloors;
-	private int mCommittedDirection;
+	private ElevatorDirection mCommittedDirection;
+    private ElevatorDoorStatus mDoorStatus;
     private int mAccel;
-    private int mDoorStatus;
     private int mFloor;
     private int mPosition;
     private int mSpeed;
@@ -31,9 +57,9 @@ public class Elevator {
     public Elevator(int numberOfFloors)
     {
 		mNrOfFloors = numberOfFloors;
-    	setCommittedDirection(IElevator.ELEVATOR_DIRECTION_UNCOMMITTED);
+    	setCommittedDirection(ElevatorDirection.Uncommitted);
+    	setDoorStatus(ElevatorDoorStatus.Closed);
     	setAccel(0);
-    	setDoorStatus(IElevator.ELEVATOR_DOORS_CLOSED);
     	setFloor(0);
     	setPosition(0);
     	setSpeed(0);
@@ -52,19 +78,16 @@ public class Elevator {
 
 	/**
      * Provides information if the elevator is going up, down or uncommited.
-     * @return ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
+     * @return ElevatorDirection.
      */
-	public int getCommittedDirection() {
+	public ElevatorDirection getCommittedDirection() {
 		return mCommittedDirection;
 	}
 
 	/**
 	 * @param committedDirection the committedDirection to set; can be either ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
 	 */
-	public void setCommittedDirection(int committedDirection) {
-		if(committedDirection < IElevator.ELEVATOR_DIRECTION_UP || committedDirection > IElevator.ELEVATOR_DIRECTION_UNCOMMITTED)
-            throw new IllegalArgumentException();
-		
+	public void setCommittedDirection(ElevatorDirection committedDirection) {		
 		this.mCommittedDirection = committedDirection;
 	}
 
@@ -106,19 +129,16 @@ public class Elevator {
 
 	/**
      * Returns the door status of the elevator.
-     * @return ELEVATOR_DOORS_OPEN, ELEVATOR_DOORS_CLOSED, ELEVATOR_DOORS_OPENING or ELEVATOR_DOORS_CLOSING.
+     * @return ElevatorDoorStatus.
      */
-	public int getDoorStatus() {
+	public ElevatorDoorStatus getDoorStatus() {
 		return mDoorStatus;
 	}
 
 	/**
 	 * @param doorStatus the doorStatus to set
 	 */
-	public void setDoorStatus(int doorStatus) {
-		if(doorStatus < IElevator.ELEVATOR_DOORS_OPEN || doorStatus > IElevator.ELEVATOR_DOORS_CLOSING)
-            throw new IllegalArgumentException();
-		
+	public void setDoorStatus(ElevatorDoorStatus doorStatus) {		
 		this.mDoorStatus = doorStatus;
 	}
 
