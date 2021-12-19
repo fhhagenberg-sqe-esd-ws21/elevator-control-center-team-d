@@ -3,15 +3,23 @@ package sqelevator;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ElevatorTest {
+	Elevator e;
+
+	@BeforeEach
+	void setup() {
+		e = new Elevator(3);
+	}
+
 	@Test
 	void TestCommitedDirection()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(2, e.getCommittedDirection());
 		
 		e.setCommittedDirection(1);
@@ -21,7 +29,6 @@ class ElevatorTest {
 	@Test
 	void TestTarget()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(0, e.getTarget());
 		
 		e.setTarget(1);
@@ -31,7 +38,6 @@ class ElevatorTest {
 	@Test
 	void TestAccell()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(0, e.getAccel());
 		
 		e.setAccel(5);
@@ -41,7 +47,6 @@ class ElevatorTest {
 	@Test
 	void TestDoorStatus()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(2, e.getDoorStatus());
 		
 		e.setDoorStatus(1);
@@ -51,7 +56,6 @@ class ElevatorTest {
 	@Test
 	void TestFloor()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(0, e.getFloor());
 		
 		e.setFloor(1);
@@ -61,7 +65,6 @@ class ElevatorTest {
 	@Test
 	void TestPosition()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(0, e.getPosition());
 		
 		e.setPosition(100);
@@ -71,7 +74,6 @@ class ElevatorTest {
 	@Test
 	void TestSpeed()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(0, e.getSpeed());
 		
 		e.setSpeed(10);
@@ -81,7 +83,6 @@ class ElevatorTest {
 	@Test
 	void TestCapacity()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(1, e.getCapacity());
 		
 		e.setCapacity(10);
@@ -91,7 +92,6 @@ class ElevatorTest {
 	@Test
 	void TestWeight()
 	{
-		Elevator e = new Elevator(1);
 		assertEquals(0, e.getWeight());
 		
 		e.setWeight(100);
@@ -101,7 +101,6 @@ class ElevatorTest {
 	@Test
 	void TestServicedFloors()
 	{
-		Elevator e = new Elevator(3);
 		for(int i = 0; i < 3; i++)
 		{
 			assertTrue(e.isFloorServiced(i));
@@ -110,23 +109,22 @@ class ElevatorTest {
 		e.setFloorServiced(1, false);
 		assertFalse(e.isFloorServiced(1));
 		
-		assertFalse(e.isFloorServiced(10));
+		assertThrows(IllegalArgumentException.class, () -> {e.isFloorServiced(10);});
 	}
 	
 	@Test
 	void TestPressedButtons()
 	{
-		Elevator e = new Elevator(3);
 		for(int i = 0; i < 3; i++)
 		{
-			assertFalse(e.isFloorButtonPressed(i));
+			assertFalse(e.isStopButtonPressed(i));
 		}
 		
-		e.setFloorButton(1, true);
-		assertTrue(e.isFloorButtonPressed(1));
+		e.setStopButton(1, true);
+		assertTrue(e.isStopButtonPressed(1));
 		
-		assertDoesNotThrow(() -> {e.setFloorButton(10, false);});
-		assertDoesNotThrow(() -> {e.isFloorButtonPressed(10);});
+		assertThrows(IllegalArgumentException.class,() -> {e.setStopButton(10, false);});
+		assertThrows(IllegalArgumentException.class,() -> {e.isStopButtonPressed(10);});
 	}
 	
 }

@@ -1,6 +1,7 @@
 package sqelevator;
 
 import java.util.ArrayList;
+import sqelevator.IElevator;
 
 /**
  * Datamodel for the Elevator
@@ -10,17 +11,18 @@ import java.util.ArrayList;
 
 public class Elevator {
 
-	private int committedDirection;
-    private int accel;
-    private int doorStatus;
-    private int floor;
-    private int position;
-    private int speed;
-    private int weight;
-    private int capacity;
-    private int target;
-    private ArrayList<Boolean> servicedFloors;
-    private ArrayList<Boolean> pressedFloorButtons;
+	private final int mNrOfFloors;
+	private int mCommittedDirection;
+    private int mAccel;
+    private int mDoorStatus;
+    private int mFloor;
+    private int mPosition;
+    private int mSpeed;
+    private int mWeight;
+    private int mCapacity;
+    private int mTarget;
+    private ArrayList<Boolean> mServicedFloors;
+    private ArrayList<Boolean> mStopButtons;
     
     /**
      * Constructor of Elevator
@@ -28,203 +30,238 @@ public class Elevator {
      */
     public Elevator(int numberOfFloors)
     {
-    	committedDirection = 2;
+		mNrOfFloors = numberOfFloors;
+    	setCommittedDirection(IElevator.ELEVATOR_DIRECTION_UNCOMMITTED);
     	setAccel(0);
-    	setDoorStatus(2);
+    	setDoorStatus(IElevator.ELEVATOR_DOORS_CLOSED);
     	setFloor(0);
     	setPosition(0);
     	setSpeed(0);
     	setWeight(0);
     	setCapacity(1);
-    	target = 0;
-    	servicedFloors = new ArrayList<Boolean>();
-    	pressedFloorButtons = new ArrayList<Boolean>();
+    	setTarget(0);
+    	mServicedFloors = new ArrayList<Boolean>();
+    	mStopButtons = new ArrayList<Boolean>();
     	
     	for(int i = 0; i < numberOfFloors; i++)
     	{
-    		servicedFloors.add(true);
-    		pressedFloorButtons.add(false);
+    		mServicedFloors.add(true);
+    		mStopButtons.add(false);
     	}
     }
 
 	/**
-	 * @return the committedDirection
-	 */
+     * Provides information if the elevator is going up, down or uncommited.
+     * @return ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
+     */
 	public int getCommittedDirection() {
-		return committedDirection;
+		return mCommittedDirection;
 	}
 
 	/**
-	 * @param committedDirection the committedDirection to set
+	 * @param committedDirection the committedDirection to set; can be either ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
 	 */
 	public void setCommittedDirection(int committedDirection) {
-		this.committedDirection = committedDirection;
+		if(committedDirection < IElevator.ELEVATOR_DIRECTION_UP || committedDirection > IElevator.ELEVATOR_DIRECTION_UNCOMMITTED)
+            throw new IllegalArgumentException();
+		
+		this.mCommittedDirection = committedDirection;
 	}
 
 	/**
-	 * @return the target
-	 */
+     * Returns the target floor of the elevator.
+     * @return Target floor number.
+     */
 	public int getTarget() {
-		return target;
+		return mTarget;
 	}
 
 	/**
 	 * @param target the target to set
 	 */
 	public void setTarget(int target) {
-		this.target = target;
+		if(target < 0 || target >= mNrOfFloors)
+            throw new IllegalArgumentException();
+		
+		this.mTarget = target;
 	}
 
 	/**
-	 * @return the accel
-	 */
+     * Provides information about how fast the elevator is going.
+     * @return acceleration in m/s.
+     */
 	public int getAccel() {
-		return accel;
+		return mAccel;
 	}
 
 	/**
 	 * @param accel the accel to set
 	 */
 	public void setAccel(int accel) {
-		this.accel = accel;
+		if(accel < 0)
+            throw new IllegalArgumentException();
+		
+		this.mAccel = accel;
 	}
 
 	/**
-	 * @return the doorStatus
-	 */
+     * Returns the door status of the elevator.
+     * @return ELEVATOR_DOORS_OPEN, ELEVATOR_DOORS_CLOSED, ELEVATOR_DOORS_OPENING or ELEVATOR_DOORS_CLOSING.
+     */
 	public int getDoorStatus() {
-		return doorStatus;
+		return mDoorStatus;
 	}
 
 	/**
 	 * @param doorStatus the doorStatus to set
 	 */
 	public void setDoorStatus(int doorStatus) {
-		this.doorStatus = doorStatus;
+		if(doorStatus < IElevator.ELEVATOR_DOORS_OPEN || doorStatus > IElevator.ELEVATOR_DOORS_CLOSING)
+            throw new IllegalArgumentException();
+		
+		this.mDoorStatus = doorStatus;
 	}
 
 	/**
-	 * @return the floor
-	 */
+     * Returns the floor the elevator is on.
+     * @return floor number that the elevator is on.
+     */
 	public int getFloor() {
-		return floor;
+		return mFloor;
 	}
 
 	/**
-	 * @param floor the floor to set
+	 * @param floor the floor that the elevator is on.
 	 */
 	public void setFloor(int floor) {
-		this.floor = floor;
+		if(floor < 0 || floor >= mNrOfFloors)
+            throw new IllegalArgumentException();
+		
+		this.mFloor = floor;
 	}
 
 	/**
-	 * @return the position
-	 */
+     * Returns the position of the elevator in m above ground.
+     * @return elevator position in m above ground.
+     */
 	public int getPosition() {
-		return position;
+		return mPosition;
 	}
 
 	/**
 	 * @param position the position to set
 	 */
 	public void setPosition(int position) {
-		this.position = position;
+		if(position < 0)
+            throw new IllegalArgumentException();
+		
+		this.mPosition = position;
 	}
 
 	/**
-	 * @return the speed
-	 */
+     * Returns the speed of the elevator in m/s.
+     * @return elevator speed.
+     */
 	public int getSpeed() {
-		return speed;
+		return mSpeed;
 	}
 
 	/**
 	 * @param speed the speed to set
 	 */
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		if(speed < 0)
+            throw new IllegalArgumentException();
+		
+		this.mSpeed = speed;
 	}
 
 	/**
 	 * @return the capacity
 	 */
 	public int getCapacity() {
-		return capacity;
+		return mCapacity;
 	}
 
 	/**
-	 * @param capacity the capacity to set
-	 */
+     * Returns the capacity of the elevator.
+     * @return elevator capacity.
+     */
 	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+		if(capacity < 0)
+            throw new IllegalArgumentException();
+		
+		this.mCapacity = capacity;
 	}
 
 	/**
-	 * @return the weight
-	 */
+     * Returns the weight of the elevator in kg.
+     * @return elevator weight in kg.
+     */
 	public int getWeight() {
-		return weight;
+		return mWeight;
 	}
 
 	/**
 	 * @param weight the weight to set
 	 */
 	public void setWeight(int weight) {
-		this.weight = weight;
+		if(weight < 0)
+            throw new IllegalArgumentException();
+
+		this.mWeight = weight;
 	}
 	
 	/**
-	 * 
-	 * @param floorNum: floor number to be checked
-	 * @return is floor serviced or not
-	 */
-	public boolean isFloorServiced(int floorNum)
+     * Tells you if the elevator services a given floor.
+     * @param floor Floornumber.
+     * @return True if elevator servies the floor, false otherwise.
+     */
+	public boolean isFloorServiced(int floor)
 	{
-		if(floorNum <= servicedFloors.size())
-		{
-			return servicedFloors.get(floorNum);
-		}
-		return false;
+		if(floor < 0 || floor >= mNrOfFloors)
+            throw new IllegalArgumentException();
+		
+		return mServicedFloors.get(floor);
 	}
 	
 	/**
-	 * 
-	 * @param floorNum: floor number to be checked
+     * Sets an elevator to service a given floor.
+	 * @param floor: floor number to be checked
 	 * @param isServiced: boolean to tell wether the floor is serviced or not
 	 */
-	public void setFloorServiced(int floorNum, boolean isServiced)
+	public void setFloorServiced(int floor, boolean isServiced)
 	{
-		if(floorNum <= servicedFloors.size())
-		{
-			servicedFloors.set(floorNum, isServiced);
-		}
+		if(floor < 0 || floor >= mNrOfFloors)
+            throw new IllegalArgumentException();
+		
+		mServicedFloors.set(floor, isServiced);
 	}
 	
 	/**
 	 * 
-	 * @param floorNum: floor number to be checked
+	 * @param floor: floor number to be checked
 	 * @return is button pressed or not
 	 */
-	public boolean isFloorButtonPressed(int floorNum)
+	public boolean isStopButtonPressed(int floor)
 	{
-		if(floorNum <= pressedFloorButtons.size())
-		{
-			return pressedFloorButtons.get(floorNum);
-		}
-		return false;
+		if(floor < 0 || floor >= mNrOfFloors)
+            throw new IllegalArgumentException();
+		
+		return mStopButtons.get(floor);
 	}
 	
 	/**
 	 * 
-	 * @param floorNum: floor number to be checked
-	 * @param isServiced: bool the tell if floor should be serviced
+	 * @param floor: floor number to be checked
+	 * @param stop: bool to tell if floor stop button should be pressed
 	 */
-	public void setFloorButton(int floorNum, boolean isServiced)
+	public void setStopButton(int floor, boolean stop)
 	{
-		if(floorNum <= pressedFloorButtons.size())
-		{
-			pressedFloorButtons.set(floorNum, isServiced);
-		}
+		if(floor < 0 || floor >= mNrOfFloors)
+            throw new IllegalArgumentException();
+			
+		mStopButtons.set(floor, stop);
 	}
 	
 }
