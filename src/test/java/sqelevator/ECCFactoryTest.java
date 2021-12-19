@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class ElevatorModelFactoryTest {
+public class ECCFactoryTest {
 
     @Mock
     private IElevator mockedInterface = mock(IElevator.class);

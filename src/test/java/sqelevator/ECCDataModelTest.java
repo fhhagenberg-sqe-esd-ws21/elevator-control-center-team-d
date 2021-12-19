@@ -10,41 +10,34 @@ import org.junit.jupiter.api.Test;
  *
  * @author Lucas Drack S2010567003
  */
-public class ElevatorModelTest {
-	
-    final int nElevators = 5;
-    final int nFloors = 10;
-    final int floorHeight = 2;
-	
+public class ECCDataModelTest {	
 	ECCDataModel model;
 	
-	// = new ElevatorModel(nElevators, nFloors, floorHeight);
-
 	@BeforeEach
 	void setup() {
 		model = new ECCDataModel(5, 10, 2);
 	}
 
 	@Test
-	void testElevatorModel_GetNumOfElevators()
+	void test_GetNumOfElevators()
 	{
 		assertEquals(5, model.getNumOfElevators());
 	}
 	
 	@Test
-	void testElevatorModel_GetNumOfFloors()
+	void test_GetNumOfFloors()
 	{
 		assertEquals(10, model.getNumOfFloors());
 	}
 	
 	@Test
-	void testElevatorModel_GetFloorHeight()
+	void test_getFloorHeight()
 	{
 		assertEquals(2, model.getFloorHeight());
 	}
 	
 	@Test
-	void testElevatorModel_getCommittedDirectionTooSmallElevator()
+	void test_getCommittedDirectionTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getCommittedDirection(-1);
@@ -52,15 +45,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getCommittedDirectionTooHighElevator()
+	void test_getCommittedDirectionTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getCommittedDirection(nElevators);
+			model.getCommittedDirection(5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setCommittedDirectionTooSmallElevator()
+	void test_setCommittedDirectionTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setCommittedDirection(-1, 5);
@@ -68,22 +61,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setCommittedDirectionTooHighElevator()
+	void test_setCommittedDirectionTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setCommittedDirection(nElevators, 5);
+			model.setCommittedDirection(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_CommittedDirection()
+	void test_CommittedDirection()
 	{
 		model.setCommittedDirection(1, 2);
 		assertEquals(2, model.getCommittedDirection(1));
 	}
 	
 	@Test
-	void testElevatorModel_getServicesFloorsTooSmallElevator()
+	void test_getServicesFloorsTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getServicesFloors(-1, 5);
@@ -91,15 +84,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getServicesFloorsTooHighElevator()
+	void test_getServicesFloorsTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getServicesFloors(nElevators, 5);
+			model.getServicesFloors(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_getServicesFloorsTooSmallFloor()
+	void test_getServicesFloorsTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getServicesFloors(1, -1);
@@ -107,15 +100,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getServicesFloorsTooHighFloor()
+	void test_getServicesFloorsTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getServicesFloors(1, nFloors);
+			model.getServicesFloors(1, 10);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setServicesFloorsTooSmallElevator()
+	void test_setServicesFloorsTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setServicesFloors(-1, 5, true);
@@ -123,15 +116,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setServicesFloorsTooHighElevator()
+	void test_setServicesFloorsTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setServicesFloors(nElevators, 5, true);
+			model.setServicesFloors(5, 5, true);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setServicesFloorsTooSmallFloor()
+	void test_setServicesFloorsTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setServicesFloors(1, -1, true);
@@ -139,22 +132,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setServicesFloorsTooHighFloor()
+	void test_setServicesFloorsTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setServicesFloors(1, nFloors, true);
+			model.setServicesFloors(1, 10, true);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ServicesFloors()
+	void test_ServicesFloors()
 	{
 		model.setServicesFloors(2, 9, true);
 		assertEquals(true, model.getServicesFloors(2, 9));
 	}
 	
 	@Test
-	void testElevatorModel_getTargetTooSmallElevator()
+	void test_getTargetTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getTarget(-1);
@@ -162,15 +155,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getTargetTooHighElevator()
+	void test_getTargetTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getTarget(nElevators);
+			model.getTarget(5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setTargetTooSmallElevator()
+	void test_setTargetTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setTarget(-1, 5);
@@ -178,15 +171,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setTargetTooHighElevator()
+	void test_setTargetTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setTarget(nElevators, 5);
+			model.setTarget(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setTargetTooSmallFloor()
+	void test_setTargetTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setTarget(1, -1);
@@ -194,22 +187,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setTargetTooHighFloor()
+	void test_setTargetTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setTarget(1, nFloors);
+			model.setTarget(1, 10);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_Target()
+	void test_Target()
 	{
 		model.setTarget(0, 9);
 		assertEquals(9, model.getTarget(0));
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorAccelTooSmallElevator()
+	void test_getElevatorAccelTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getElevatorAccel(-1);
@@ -217,16 +210,16 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorAccelTooHighElevator()
+	void test_getElevatorAccelTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getElevatorAccel(nElevators);
+			model.getElevatorAccel(5);
 		});
 	}
 	
 	
 	@Test
-	void testElevatorModel_setElevatorAccelTooSmallElevator()
+	void test_setElevatorAccelTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorAccel(-1, 923);
@@ -234,22 +227,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorAccelTooHighElevator()
+	void test_setElevatorAccelTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorAccel(nElevators, 123);
+			model.setElevatorAccel(5, 123);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorAccel()
+	void test_ElevatorAccel()
 	{
 		model.setElevatorAccel(2, 100);
 		assertEquals(100, model.getElevatorAccel(2));
 	}
 	
 	@Test
-	void testElevatorModel_getFloorRequestedInElevatorTooSmallElevator()
+	void test_getFloorRequestedInElevatorTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getFloorRequestedInElevator(-1, 5);
@@ -257,15 +250,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getFloorRequestedInElevatorTooHighElevator()
+	void test_getFloorRequestedInElevatorTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getFloorRequestedInElevator(nElevators, 5);
+			model.getFloorRequestedInElevator(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_getFloorRequestedInElevatorTooSmallFloor()
+	void test_getFloorRequestedInElevatorTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getFloorRequestedInElevator(1, -1);
@@ -273,16 +266,16 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getFloorRequestedInElevatorTooHighFloor()
+	void test_getFloorRequestedInElevatorTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getFloorRequestedInElevator(1, nFloors);
+			model.getFloorRequestedInElevator(1, 10);
 		});
 	}
 	
 	
 	@Test
-	void testElevatorModel_setFloorRequestedInElevatorTooSmallElevator()
+	void test_setFloorRequestedInElevatorTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setFloorRequestedInElevator(-1, 4, false);
@@ -290,15 +283,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setFloorRequestedInElevatorTooHighElevator()
+	void test_setFloorRequestedInElevatorTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setFloorRequestedInElevator(nElevators, 3, false);
+			model.setFloorRequestedInElevator(5, 3, false);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setFloorRequestedInElevatorTooSmallFloor()
+	void test_setFloorRequestedInElevatorTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setFloorRequestedInElevator(0, -1, false);
@@ -306,22 +299,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setFloorRequestedInElevatorTooHighFloor()
+	void test_setFloorRequestedInElevatorTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setFloorRequestedInElevator(0, nFloors, false);
+			model.setFloorRequestedInElevator(0, 10, false);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorButton()
+	void test_ElevatorButton()
 	{
 		model.setFloorRequestedInElevator(1, 6, true);
 		assertEquals(true, model.getFloorRequestedInElevator(1, 6));
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorDoorStatusTooSmallElevator()
+	void test_getElevatorDoorStatusTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getElevatorDoorStatus(-1);
@@ -329,16 +322,16 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorDoorStatusTooHighElevator()
+	void test_getElevatorDoorStatusTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getElevatorDoorStatus(nElevators);
+			model.getElevatorDoorStatus(5);
 		});
 	}
 	
 	
 	@Test
-	void testElevatorModel_setElevatorDoorStatusTooSmallElevator()
+	void test_setElevatorDoorStatusTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorDoorStatus(-1, 923);
@@ -346,22 +339,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorDoorStatusTooHighElevator()
+	void test_setElevatorDoorStatusTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorDoorStatus(nElevators, 123);
+			model.setElevatorDoorStatus(5, 123);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorDoorStatus()
+	void test_ElevatorDoorStatus()
 	{
 		model.setElevatorDoorStatus(1, 3);
 		assertEquals(3, model.getElevatorDoorStatus(1));
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorFloorTooSmallElevator()
+	void test_getElevatorFloorTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getElevatorFloor(-1);
@@ -369,15 +362,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorFloorTooHighElevator()
+	void test_getElevatorFloorTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getElevatorFloor(nElevators);
+			model.getElevatorFloor(5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorFloorTooSmallElevator()
+	void test_setElevatorFloorTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorFloor(-1, 5);
@@ -385,15 +378,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorFloorTooHighElevator()
+	void test_setElevatorFloorTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorFloor(nElevators, 5);
+			model.setElevatorFloor(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorFloorTooSmallFloor()
+	void test_setElevatorFloorTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorFloor(1, -1);
@@ -401,22 +394,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorFloorTooHighFloor()
+	void test_setElevatorFloorTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorFloor(1, nFloors);
+			model.setElevatorFloor(1, 10);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorFloor()
+	void test_ElevatorFloor()
 	{
 		model.setElevatorFloor(0, 3);
 		assertEquals(3, model.getElevatorFloor(0));
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorPositionTooSmallElevator()
+	void test_getElevatorPositionTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getElevatorPosition(-1);
@@ -424,15 +417,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorPositionTooHighElevator()
+	void test_getElevatorPositionTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getElevatorPosition(nElevators);
+			model.getElevatorPosition(5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorPositionTooSmallElevator()
+	void test_setElevatorPositionTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorPosition(-1, 5);
@@ -440,22 +433,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorPositionTooHighElevator()
+	void test_setElevatorPositionTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorPosition(nElevators, 5);
+			model.setElevatorPosition(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorPosition()
+	void test_ElevatorPosition()
 	{
 		model.setElevatorPosition(1, 256);
 		assertEquals(256, model.getElevatorPosition(1));
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorSpeedTooSmallElevator()
+	void test_getElevatorSpeedTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getElevatorSpeed(-1);
@@ -463,15 +456,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorSpeedTooHighElevator()
+	void test_getElevatorSpeedTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getElevatorSpeed(nElevators);
+			model.getElevatorSpeed(5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorSpeedTooSmallElevator()
+	void test_setElevatorSpeedTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorSpeed(-1, 5);
@@ -479,22 +472,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorSpeedTooHighElevator()
+	void test_setElevatorSpeedTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorSpeed(nElevators, 5);
+			model.setElevatorSpeed(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorSpeed()
+	void test_ElevatorSpeed()
 	{
 		model.setElevatorSpeed(0, 203);
 		assertEquals(203, model.getElevatorSpeed(0));
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorWeightTooSmallElevator()
+	void test_getElevatorWeightTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getElevatorWeight(-1);
@@ -502,15 +495,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorWeightTooHighElevator()
+	void test_getElevatorWeightTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getElevatorWeight(nElevators);
+			model.getElevatorWeight(5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorWeightTooSmallElevator()
+	void test_setElevatorWeightTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorWeight(-1, 5);
@@ -518,22 +511,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorWeightTooHighElevator()
+	void test_setElevatorWeightTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorWeight(nElevators, 5);
+			model.setElevatorWeight(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorWeight()
+	void test_ElevatorWeight()
 	{
 		model.setElevatorWeight(2, 500);
 		assertEquals(500, model.getElevatorWeight(2));
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorCapacityTooSmallElevator()
+	void test_getElevatorCapacityTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getElevatorCapacity(-1);
@@ -541,15 +534,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getElevatorCapacityTooHighElevator()
+	void test_getElevatorCapacityTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getElevatorCapacity(nElevators);
+			model.getElevatorCapacity(5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorCapacityTooSmallElevator()
+	void test_setElevatorCapacityTooSmallElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setElevatorCapacity(-1, 5);
@@ -557,22 +550,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setElevatorCapacityTooHighElevator()
+	void test_setElevatorCapacityTooHighElevator()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setElevatorCapacity(nElevators, 5);
+			model.setElevatorCapacity(5, 5);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_ElevatorCapacity()
+	void test_ElevatorCapacity()
 	{
 		model.setElevatorCapacity(2, 10);
 		assertEquals(10, model.getElevatorCapacity(2));
 	}
 	
 	@Test
-	void testElevatorModel_getFloorButtonDownTooSmallFloor()
+	void test_getFloorButtonDownTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getFloorButtonDown(-1);
@@ -580,15 +573,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getFloorButtonDownTooHighFloor()
+	void test_getFloorButtonDownTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getFloorButtonDown(nFloors);
+			model.getFloorButtonDown(10);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setFloorButtonDownTooSmallFloor()
+	void test_setFloorButtonDownTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setFloorButtonDown(-1, true);
@@ -596,22 +589,22 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setFloorButtonDownTooHighFloor()
+	void test_setFloorButtonDownTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setFloorButtonDown(nFloors, true);
+			model.setFloorButtonDown(10, true);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_FloorButtonDown()
+	void test_FloorButtonDown()
 	{
 		model.setFloorButtonDown(2, true);
 		assertEquals(true, model.getFloorButtonDown(2));
 	}
 	
 	@Test
-	void testElevatorModel_getFloorButtonUpTooSmallFloor()
+	void test_getFloorButtonUpTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.getFloorButtonUp(-1);
@@ -619,15 +612,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_getFloorButtonUpTooHighFloor()
+	void test_getFloorButtonUpTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.getFloorButtonUp(nFloors);
+			model.getFloorButtonUp(10);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_setFloorButtonUpTooSmallFloor()
+	void test_setFloorButtonUpTooSmallFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
 			model.setFloorButtonUp(-1, true);
@@ -635,15 +628,15 @@ public class ElevatorModelTest {
 	}
 	
 	@Test
-	void testElevatorModel_setFloorButtonUpTooHighFloor()
+	void test_setFloorButtonUpTooHighFloor()
 	{
 		assertThrows(IllegalArgumentException.class, () ->{
-			model.setFloorButtonUp(nFloors, true);
+			model.setFloorButtonUp(10, true);
 		});
 	}
 	
 	@Test
-	void testElevatorModel_FloorButtonUp()
+	void test_FloorButtonUp()
 	{
 		model.setFloorButtonUp(6, true);
 		assertEquals(true, model.getFloorButtonUp(6));
@@ -651,14 +644,14 @@ public class ElevatorModelTest {
 	
 	
 	@Test
-	void testElevatorModel_LoggingLevel()
+	void test_LoggingLevel()
 	{
 		model.setLogging(5);
 		assertEquals(5, model.getLogging());
 	}
 	
 	@Test
-	void testElevatorModel_ClockTick()
+	void test_ClockTick()
 	{
 		model.setClockTick(50);
 		assertEquals(50, model.getClockTick());
