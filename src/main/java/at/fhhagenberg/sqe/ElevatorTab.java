@@ -27,6 +27,10 @@ public class ElevatorTab {
         mNumber = elevatorNumber;
     }
 
+    private void upDateElevator(int target) {
+        mElevator.setTarget(target);
+    }
+
     public Tab createTab() {
         String tabName = "Elevator " + String.valueOf(mNumber);
 
@@ -62,11 +66,13 @@ public class ElevatorTab {
         Text NextFloorHeader = new Text("Next Floor");
 
         ComboBox comboBox = new ComboBox();
-        for (int i = 1; i <= mFloors.size(); i++) {
+        for (int i = 0; i < mFloors.size(); i++) {
             String Floor = "Floor " + i;
             comboBox.getItems().add(Floor);
         }
+
         Button setTarget = new Button("Go!");
+        setTarget.setOnAction(evt -> upDateElevator(comboBox.getSelectionModel().getSelectedIndex()));
 
         ToggleButton enableAutoMode = new ToggleButton("Automatic Mode");
         enableAutoMode.setDisable(true);
