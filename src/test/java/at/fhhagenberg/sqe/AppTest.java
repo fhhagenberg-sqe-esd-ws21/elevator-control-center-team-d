@@ -35,6 +35,7 @@ public class AppTest {
     /**
      * @param robot - Will be injected by the test runner.
      */
+    @Disabled
     @Test
     public void testGoButtonClick(FxRobot robot) {
         robot.clickOn("#floorComboBox");
