@@ -13,72 +13,109 @@ import sqelevator.*;
 
 public class ElevatorTab {
 
+    private class FloorTexts{
+        public Text floor = new Text("");
+        public Text upRequested = new Text("");
+        public Text downRequested = new Text("");
+    }
+
+    private int mButtonPressed = 0;
+
     private Elevator mElevator;
     private ArrayList<Floor> mFloors;
+    private ArrayList<FloorTexts> mFloorsText;
     private int mNumber;
+    private Text payloadVal = new Text("");
+    private Text speedVal = new Text("");
+    private Text targetVal = new Text("");
+    private Text doorVal = new Text("");
 
     ElevatorTab(Elevator elevator, int elevatorNumber, ArrayList<Floor> floors) {
-        if (elevatorNumber < 0 || floors.size() == 0) {
+        if (elevatorNumber < 0 || floors.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
         mElevator = elevator;
         mFloors = floors;
         mNumber = elevatorNumber;
+        mFloorsText = new ArrayList<>();
+        for(int i = 0; i < floors.size(); i++){
+            mFloorsText.add(new FloorTexts());
+        }
     }
 
     private void upDateElevator(int target) {
         mElevator.setTarget(target);
     }
 
+    public void updateTab(){
+        mButtonPressed++;
+
+        payloadVal.setText(String.valueOf(mElevator.getWeight()) + "kg");
+        speedVal.setText(String.valueOf(mElevator.getSpeed()) + "m/s");
+        targetVal.setText(String.valueOf(mElevator.getFloor() + mButtonPressed));
+        doorVal.setText(mElevator.getDoorStatus().name());
+
+        for (int i = 0; i < mFloors.size(); i++) {
+            mFloorsText.get(i).floor.setText(String.valueOf(i));
+            mFloorsText.get(i).upRequested.setText(String.valueOf(mFloors.get(i).isUpButtonPressed()));
+            mFloorsText.get(i).downRequested.setText(String.valueOf(mFloors.get(i).isDownButtonPressed()));
+        }
+    }
+
     public Tab createTab() {
-        String tabName = "Elevator " + String.valueOf(mNumber);
+        String tabName = "Elevator " + mNumber;
 
         // stats
-        Text StatsHeader = new Text("Stats");
-        StatsHeader.setId("Stats");
-        StatsHeader.setFill(Color.BLUE);
-        Text Payload = new Text("Payload: ");
-        Text PayloadVal = new Text(String.valueOf(mElevator.getWeight()) + "kg");
-        Text Speed = new Text("Speed: ");
-        Text SpeedVal = new Text(String.valueOf(mElevator.getSpeed()) + "m/s");
-        Text Target = new Text("Target: ");
-        Text TargetVal = new Text(String.valueOf(mElevator.getFloor()));
-        Text DoorStat = new Text("Door: ");
-        Text DoorVal = new Text(mElevator.getDoorStatus().name());
+        Text statsHeader = new Text("Stats");
+        statsHeader.setId("Stats");
+        statsHeader.setFill(Color.BLUE);
+        Text payload = new Text("Payload: ");
+        Text speed = new Text("Speed: ");
+        Text target = new Text("Target: ");
+        Text doorStat = new Text("Door: ");
+        
 
         GridPane grid = new GridPane();
-        grid.add(StatsHeader, 0, 0);
-        grid.add(Payload, 0, 1);
-        grid.add(PayloadVal, 1, 1);
-        grid.add(Speed, 0, 2);
-        grid.add(SpeedVal, 1, 2);
-        grid.add(DoorStat, 0, 3);
-        grid.add(DoorVal, 1, 3);
-        grid.add(Target, 0, 4);
-        grid.add(TargetVal, 1, 4);
+        grid.add(statsHeader, 0, 0);
+        grid.add(payload, 0, 1);
+        grid.add(payloadVal, 1, 1);
+        grid.add(speed, 0, 2);
+        grid.add(speedVal, 1, 2);
+        grid.add(doorStat, 0, 3);
+        grid.add(doorVal, 1, 3);
+        grid.add(target, 0, 4);
+        grid.add(targetVal, 1, 4);
 
         // Manuel mode
-        Text ManuelModeHeader = new Text("Manuel Mode");
-        ManuelModeHeader.setFill(Color.BLUE);
-        // ManuelModeHeader.setFont(Font.font("verdana", FontWeight.BOLD,
-        // FontPosture.REGULAR, 20));
-        Text NextFloorHeader = new Text("Next Floor");
+        Text manuelModeHeader = new Text("Manuel Mode");
+        manuelModeHeader.setFill(Color.BLUE);
+        Text nextFloorHeader = new Text("Next Floor");
 
-        ComboBox comboBox = new ComboBox();
+        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox.setId("floorComboBox");
+
         for (int i = 0; i < mFloors.size(); i++) {
-            String Floor = "Floor " + i;
-            comboBox.getItems().add(Floor);
+            String floor = "Floor " + i;
+            comboBox.getItems().add(floor);
         }
 
         Button setTarget = new Button("Go!");
+        setTarget.setId("goButton");
+
+        setTarget.setDisable(true);
         setTarget.setOnAction(evt -> upDateElevator(comboBox.getSelectionModel().getSelectedIndex()));
+
+        comboBox.setOnAction(evt -> {
+            if(comboBox.getSelectionModel() != null)
+                setTarget.setDisable(false);
+        });
 
         ToggleButton enableAutoMode = new ToggleButton("Automatic Mode");
         enableAutoMode.setDisable(true);
 
-        grid.add(ManuelModeHeader, 3, 0);
-        grid.add(NextFloorHeader, 3, 1);
+        grid.add(manuelModeHeader, 3, 0);
+        grid.add(nextFloorHeader, 3, 1);
         grid.add(comboBox, 3, 2);
         grid.add(setTarget, 4, 2);
         grid.add(enableAutoMode, 3, 3);
@@ -92,31 +129,33 @@ public class ElevatorTab {
         grid.add(directionText, 5, 1);
 
         // Logs
-        Text LogHeader = new Text("LastError");
-        Text LastError = new Text("no Errors"); // TODO
-        grid.add(LogHeader, 3, 4);
-        grid.add(LastError, 3, 5);
+        Text logHeader = new Text("LastError");
+        Text lastError = new Text("no Errors"); // TODO
+        grid.add(logHeader, 3, 4);
+        grid.add(lastError, 3, 5);
 
         // Floor Status
-        Text FloorLabel = new Text("Floor");
-        Text UpBotton = new Text("Up Button");
-        Text DownBotton = new Text("Down Button");
+        Text floorLabel = new Text("Floor");
+        Text upBotton = new Text("Up Button");
+        Text downBotton = new Text("Down Button");
 
-        grid.add(FloorLabel, 5, 3);
-        grid.add(UpBotton, 6, 3);
-        grid.add(DownBotton, 7, 3);
+        grid.add(floorLabel, 5, 3);
+        grid.add(upBotton, 6, 3);
+        grid.add(downBotton, 7, 3);
 
         for (int i = 0; i < mFloors.size(); i++) {
-            Text floor = new Text(String.valueOf(i));
-            Text upRequested = new Text(String.valueOf(mFloors.get(i).isUpButtonPressed()));
-            Text downRequested = new Text(String.valueOf(mFloors.get(i).isDownButtonPressed()));
-
-            grid.add(floor, 5, 4 + i);
-            grid.add(upRequested, 6, 4 + i);
-            grid.add(downRequested, 7, 4 + i);
+            grid.add(mFloorsText.get(i).floor, 5, 4 + i);
+            grid.add(mFloorsText.get(i).upRequested, 6, 4 + i);
+            grid.add(mFloorsText.get(i).downRequested, 7, 4 + i);
         }
 
+        Button button = new Button("refresh");
+        button.setOnAction(evt -> updateTab());
+        grid.add(button,8,1);
+
         Tab tab = new Tab(tabName, grid);
+
+        tab.setClosable(false);
 
         return tab;
     }

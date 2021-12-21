@@ -1,15 +1,14 @@
 package at.fhhagenberg.sqe;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextMatchers;
 
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
@@ -36,13 +35,14 @@ public class AppTest {
     /**
      * @param robot - Will be injected by the test runner.
      */
-    @Disabled
     @Test
-    public void testButtonClick(FxRobot robot) {
-        // when:
-        // robot.clickOn(".button");
+    public void testGoButtonClick(FxRobot robot) {
+        robot.clickOn("#floorComboBox");
+        robot.type(KeyCode.DOWN);
+        robot.type(KeyCode.ENTER);
 
-        // or (lookup by css class):
-        // FxAssert.verifyThat(".button", LabeledMatchers.hasText("Clicked!"));
+        robot.clickOn("#goButton");
+        
+        FxAssert.verifyThat("#Stats", TextMatchers.hasText("Stats"));
     }
 }
