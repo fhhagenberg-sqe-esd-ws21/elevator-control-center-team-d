@@ -63,10 +63,6 @@ public class ElevatorTab {
         }
     }
 
-    private void upDateElevator(int target) {
-        mElevator.setTarget(target);
-    }
-
     public Tab createTab() {
         String tabName = "Elevator " + mNumber;
 

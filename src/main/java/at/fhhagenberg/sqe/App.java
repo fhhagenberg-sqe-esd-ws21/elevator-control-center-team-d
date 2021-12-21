@@ -3,14 +3,9 @@ package at.fhhagenberg.sqe;
 import java.util.ArrayList;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sqelevator.Elevator;
 import sqelevator.Floor;
@@ -19,12 +14,6 @@ import sqelevator.Floor;
  * JavaFX App
  */
 public class App extends Application {
-    private int payload = 1000;
-    private int speed = 20;
-    private int target = 5;
-    private boolean door = false;
-    private int numOfFloors = 4;
-    private int numOfElevators = 2;
 
     // Hier: ECCManager instanzieren
     // Layout-Klasse anlegen, die die GUI aufbaut und Manager mitgeben
