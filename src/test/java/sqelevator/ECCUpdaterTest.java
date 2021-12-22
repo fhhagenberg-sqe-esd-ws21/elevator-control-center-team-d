@@ -6,9 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import sqelevator.Elevator.ElevatorDirection;
-import sqelevator.Elevator.ElevatorDoorStatus;
-
 import java.rmi.RemoteException;
 
 import static org.junit.jupiter.api.Assertions.*;

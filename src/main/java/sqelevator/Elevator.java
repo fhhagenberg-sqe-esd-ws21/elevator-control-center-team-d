@@ -11,32 +11,6 @@ import sqelevator.IElevator;
 
 public class Elevator {
 
-	/**
-	 * Enum wrapper for elevator door status.
-	 * Open    - Doors are open
-	 * Closed  - Doors are closed
-	 * Opening - Door are opening
-	 * Closing - Door are closing
-	 */
-	public enum ElevatorDoorStatus {
-		OPEN, 
-		CLOSED, 
-		OPENING,
-		CLOSING
-	}
-
-	/**
-	 * Enum wrapper for elevator direction status.
-	 * Up          - Elevator is moving up
-	 * Down        - Elevator is moving down
-	 * Uncommitted - Elevator is currently not moving
-	 */
-	public enum ElevatorDirection {
-		UP, 
-		DOWN, 
-		UNCOMMITTED
-	}
-
 	private final int mNrOfFloors;
 	private ElevatorDirection mCommittedDirection;
     private ElevatorDoorStatus mDoorStatus;
