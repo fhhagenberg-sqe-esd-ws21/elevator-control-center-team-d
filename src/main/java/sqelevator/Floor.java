@@ -1,5 +1,8 @@
 package sqelevator;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * Class representing a single Floor for the elevator model
  * @author Florian Berghuber
@@ -7,8 +10,10 @@ package sqelevator;
  */
 
 public class Floor {
-	private boolean upButtonPressed;
-	private boolean downButtonPressed;
+	private BooleanProperty upButtonPressed = new SimpleBooleanProperty(false);
+	private BooleanProperty downButtonPressed = new SimpleBooleanProperty(false);
+	// private boolean upButtonPressed;
+	// private boolean downButtonPressed;
 	
 	/**
 	 * Constructor of Floor Class
@@ -25,28 +30,38 @@ public class Floor {
      * @return True if the down button was pressed on floor, false otherwise.
      */
 	public boolean isDownButtonPressed() {
-		return downButtonPressed;
+		return downButtonPressed.get();
 	}
 
 	/**
 	 * @param downButtonPressed the downButtonPressed to set
 	 */
 	public void setDownButtonPressed(boolean downButtonPressed) {
-		this.downButtonPressed = downButtonPressed;
+		this.downButtonPressed.set(downButtonPressed);
 	}
+
+	public BooleanProperty downButtonPressedProperty() {
+		return downButtonPressed;
+	}
+
+
 
 	/**
      * Provides information if the up button was pressed on a particular floor.
      * @return True if the up button was pressed on floor, false otherwise.
      */
 	public boolean isUpButtonPressed() {
-		return upButtonPressed;
+		return upButtonPressed.get();
 	}
 
 	/**
 	 * @param upButtonPressed the upButtonPressed to set
 	 */
 	public void setUpButtonPressed(boolean upButtonPressed) {
-		this.upButtonPressed = upButtonPressed;
+		this.upButtonPressed.set(upButtonPressed);
+	}
+
+	public BooleanProperty upButtonPressedProperty() {
+		return upButtonPressed;
 	}
 }
