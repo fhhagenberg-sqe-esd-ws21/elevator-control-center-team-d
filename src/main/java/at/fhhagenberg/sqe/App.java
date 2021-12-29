@@ -3,6 +3,8 @@ package at.fhhagenberg.sqe;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -35,6 +37,21 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("Elevator Control Center");
         stage.show();
+
+        Task<Void> pollingTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (true) { // NOSONAR
+                    Thread.sleep(100);
+                    // fetch new data
+                    Platform.runLater(() -> {
+                        // update model
+                    });
+                }
+            }
+        };
+        new Thread(pollingTask).start();
+
     }
 
     /**
