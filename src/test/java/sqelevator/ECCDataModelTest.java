@@ -41,8 +41,8 @@ public class ECCDataModelTest {
 	void test_getElevator()
 	{
 		Elevator e = model.getElevator(0);
-		assertEquals(Elevator.ElevatorDirection.UNCOMMITTED, e.getCommittedDirection());
-		assertEquals(Elevator.ElevatorDoorStatus.CLOSED, e.getDoorStatus());
+		assertEquals(ElevatorDirection.UNCOMMITTED, e.getCommittedDirection());
+		assertEquals(ElevatorDoorStatus.CLOSED, e.getDoorStatus());
 	}
 
 	@Test

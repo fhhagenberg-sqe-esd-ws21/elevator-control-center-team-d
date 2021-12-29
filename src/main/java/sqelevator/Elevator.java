@@ -1,54 +1,41 @@
 package sqelevator;
 
 import java.util.ArrayList;
-import sqelevator.IElevator;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 
 /**
  * Datamodel for the Elevator
- * @author Florian
  *
  */
-
 public class Elevator {
 
-	/**
-	 * Enum wrapper for elevator door status.
-	 * Open    - Doors are open
-	 * Closed  - Doors are closed
-	 * Opening - Door are opening
-	 * Closing - Door are closing
-	 */
-	public enum ElevatorDoorStatus {
-		OPEN, 
-		CLOSED, 
-		OPENING,
-		CLOSING
-	}
-
-	/**
-	 * Enum wrapper for elevator direction status.
-	 * Up          - Elevator is moving up
-	 * Down        - Elevator is moving down
-	 * Uncommitted - Elevator is currently not moving
-	 */
-	public enum ElevatorDirection {
-		UP, 
-		DOWN, 
-		UNCOMMITTED
-	}
-
 	private final int mNrOfFloors;
-	private ElevatorDirection mCommittedDirection;
-    private ElevatorDoorStatus mDoorStatus;
-    private int mAccel;
-    private int mFloor;
-    private int mPosition;
-    private int mSpeed;
-    private int mWeight;
-    private int mCapacity;
-    private int mTarget;
-    private ArrayList<Boolean> mServicedFloors;
-    private ArrayList<Boolean> mStopButtons;
+
+
+	// private ElevatorDirection mCommittedDirection;
+    // private ElevatorDoorStatus mDoorStatus;
+	private ObjectProperty<ElevatorDirection> mCommittedDirection = new SimpleObjectProperty<>(ElevatorDirection.UNCOMMITTED);
+	private ObjectProperty<ElevatorDoorStatus> mDoorStatus = new SimpleObjectProperty<>(ElevatorDoorStatus.CLOSED);
+    
+	private IntegerProperty mAccel = new SimpleIntegerProperty(0);
+    private IntegerProperty mFloor = new SimpleIntegerProperty(0);
+    private IntegerProperty mPosition = new SimpleIntegerProperty(0);
+    private IntegerProperty mSpeed = new SimpleIntegerProperty(0);
+    private IntegerProperty mWeight = new SimpleIntegerProperty(0);
+    private IntegerProperty mCapacity = new SimpleIntegerProperty(1);
+    private IntegerProperty mTarget = new SimpleIntegerProperty(0);
+
+    // private ArrayList<Boolean> mServicedFloors;
+    private ListProperty<Boolean> mStopButtons;
+	private ListProperty<Boolean> mServicedFloors;
     
     /**
      * Constructor of Elevator
@@ -57,18 +44,17 @@ public class Elevator {
     public Elevator(int numberOfFloors)
     {
 		mNrOfFloors = numberOfFloors;
-    	setCommittedDirection(ElevatorDirection.UNCOMMITTED);
-    	setDoorStatus(ElevatorDoorStatus.CLOSED);
-    	setAccel(0);
-    	setFloor(0);
-    	setPosition(0);
-    	setSpeed(0);
-    	setWeight(0);
-    	setCapacity(1);
-    	setTarget(0);
-    	mServicedFloors = new ArrayList<Boolean>();
-    	mStopButtons = new ArrayList<Boolean>();
-    	
+    	// setCommittedDirection(ElevatorDirection.UNCOMMITTED);
+    	// setDoorStatus(ElevatorDoorStatus.CLOSED);
+
+		// Initialize Lists by first creating an observableArrayList.
+		// This is needed so the ListProperty can be observed.
+		ObservableList<Boolean> serviceList = FXCollections.observableArrayList(new ArrayList<Boolean>());
+		mServicedFloors = new SimpleListProperty<Boolean>(serviceList);
+
+		ObservableList<Boolean> stopList = FXCollections.observableArrayList(new ArrayList<Boolean>());
+		mStopButtons = new SimpleListProperty<Boolean>(stopList);
+
     	for(int i = 0; i < numberOfFloors; i++)
     	{
     		mServicedFloors.add(true);
@@ -81,22 +67,51 @@ public class Elevator {
      * @return ElevatorDirection.
      */
 	public ElevatorDirection getCommittedDirection() {
-		return mCommittedDirection;
+		return mCommittedDirection.get();
 	}
 
 	/**
 	 * @param committedDirection the committedDirection to set; can be either ELEVATOR_DIRECTION_UP, ELEVATOR_DIRECTION_DOWN or ELEVATOR_DIRECTION_UNCOMMITED.
 	 */
 	public void setCommittedDirection(ElevatorDirection committedDirection) {		
-		this.mCommittedDirection = committedDirection;
+		this.mCommittedDirection.set(committedDirection);
 	}
+
+	public ObjectProperty<ElevatorDirection> mCommittedDirectionProperty() {
+		return mCommittedDirection;
+	}
+
+
+
+
+	/**
+     * Returns the door status of the elevator.
+     * @return ElevatorDoorStatus.
+     */
+	public ElevatorDoorStatus getDoorStatus() {
+		return mDoorStatus.get();
+	}
+
+	/**
+	 * @param doorStatus the doorStatus to set
+	 */
+	public void setDoorStatus(ElevatorDoorStatus doorStatus) {		
+		this.mDoorStatus.set(doorStatus);
+	}
+
+	public ObjectProperty<ElevatorDoorStatus> mDoorStatusProperty() {
+		return mDoorStatus;
+	}
+
+
+
 
 	/**
      * Returns the target floor of the elevator.
      * @return Target floor number.
      */
 	public int getTarget() {
-		return mTarget;
+		return mTarget.get();
 	}
 
 	/**
@@ -106,15 +121,22 @@ public class Elevator {
 		if(target < 0 || target >= mNrOfFloors)
             throw new IllegalArgumentException();
 		
-		this.mTarget = target;
+		this.mTarget.set(target);
 	}
+
+	public IntegerProperty mTargetProperty() {
+		return mTarget;
+	}
+
+
+
 
 	/**
      * Provides information about how fast the elevator is going.
      * @return acceleration in m/s.
      */
 	public int getAccel() {
-		return mAccel;
+		return mAccel.get();
 	}
 
 	/**
@@ -124,30 +146,22 @@ public class Elevator {
 		if(accel < 0)
             throw new IllegalArgumentException();
 		
-		this.mAccel = accel;
+		this.mAccel.set(accel);
 	}
 
-	/**
-     * Returns the door status of the elevator.
-     * @return ElevatorDoorStatus.
-     */
-	public ElevatorDoorStatus getDoorStatus() {
-		return mDoorStatus;
+	public IntegerProperty mAccelProperty() {
+		return mAccel;
 	}
 
-	/**
-	 * @param doorStatus the doorStatus to set
-	 */
-	public void setDoorStatus(ElevatorDoorStatus doorStatus) {		
-		this.mDoorStatus = doorStatus;
-	}
+
+
 
 	/**
      * Returns the floor the elevator is on.
      * @return floor number that the elevator is on.
      */
 	public int getFloor() {
-		return mFloor;
+		return mFloor.get();
 	}
 
 	/**
@@ -157,15 +171,22 @@ public class Elevator {
 		if(floor < 0 || floor >= mNrOfFloors)
             throw new IllegalArgumentException();
 		
-		this.mFloor = floor;
+		this.mFloor.set(floor);
 	}
+
+	public IntegerProperty mFloorProperty() {
+		return mFloor;
+	}
+
+
+
 
 	/**
      * Returns the position of the elevator in m above ground.
      * @return elevator position in m above ground.
      */
 	public int getPosition() {
-		return mPosition;
+		return mPosition.get();
 	}
 
 	/**
@@ -175,15 +196,22 @@ public class Elevator {
 		if(position < 0)
             throw new IllegalArgumentException();
 		
-		this.mPosition = position;
+		this.mPosition.set(position);
 	}
+
+	public IntegerProperty mPositionProperty() {
+		return mPosition;
+	}
+
+
+
 
 	/**
      * Returns the speed of the elevator in m/s.
      * @return elevator speed.
      */
 	public int getSpeed() {
-		return mSpeed;
+		return mSpeed.get();
 	}
 
 	/**
@@ -193,14 +221,21 @@ public class Elevator {
 		if(speed < 0)
             throw new IllegalArgumentException();
 		
-		this.mSpeed = speed;
+		this.mSpeed.set(speed);
 	}
+
+	public IntegerProperty mSpeedProperty() {
+		return mSpeed;
+	}
+
+
+
 
 	/**
 	 * @return the capacity
 	 */
 	public int getCapacity() {
-		return mCapacity;
+		return mCapacity.get();
 	}
 
 	/**
@@ -211,15 +246,22 @@ public class Elevator {
 		if(capacity < 0)
             throw new IllegalArgumentException();
 		
-		this.mCapacity = capacity;
+		this.mCapacity.set(capacity);
 	}
+
+	public IntegerProperty mCapacityProperty() {
+		return mCapacity;
+	}
+
+
+
 
 	/**
      * Returns the weight of the elevator in kg.
      * @return elevator weight in kg.
      */
 	public int getWeight() {
-		return mWeight;
+		return mWeight.get();
 	}
 
 	/**
@@ -229,15 +271,22 @@ public class Elevator {
 		if(weight < 0)
             throw new IllegalArgumentException();
 
-		this.mWeight = weight;
+		this.mWeight.set(weight);
 	}
+
+	public IntegerProperty mWeightProperty() {
+		return mWeight;
+	}
+
+
+
 	
 	/**
      * Tells you if the elevator services a given floor.
      * @param floor Floornumber.
      * @return True if elevator servies the floor, false otherwise.
      */
-	public boolean isFloorServiced(int floor)
+	public Boolean isFloorServiced(int floor)
 	{
 		if(floor < 0 || floor >= mNrOfFloors)
             throw new IllegalArgumentException();
@@ -250,20 +299,27 @@ public class Elevator {
 	 * @param floor: floor number to be checked
 	 * @param isServiced: boolean to tell wether the floor is serviced or not
 	 */
-	public void setFloorServiced(int floor, boolean isServiced)
+	public void setFloorServiced(int floor, Boolean isServiced)
 	{
 		if(floor < 0 || floor >= mNrOfFloors)
             throw new IllegalArgumentException();
 		
 		mServicedFloors.set(floor, isServiced);
 	}
+
+	public ObservableList<Boolean> mServicedFloorsProperty() {
+		return mServicedFloors.get();
+	}
+
+
+
 	
 	/**
 	 * 
 	 * @param floor: floor number to be checked
 	 * @return is button pressed or not
 	 */
-	public boolean isStopButtonPressed(int floor)
+	public Boolean isStopButtonPressed(int floor)
 	{
 		if(floor < 0 || floor >= mNrOfFloors)
             throw new IllegalArgumentException();
@@ -276,12 +332,16 @@ public class Elevator {
 	 * @param floor: floor number to be checked
 	 * @param stop: bool to tell if floor stop button should be pressed
 	 */
-	public void setStopButton(int floor, boolean stop)
+	public void setStopButton(int floor, Boolean stop)
 	{
 		if(floor < 0 || floor >= mNrOfFloors)
             throw new IllegalArgumentException();
 			
 		mStopButtons.set(floor, stop);
+	}
+
+	public ObservableList<Boolean> mStopButtonsProperty() {
+		return mStopButtons.get();
 	}
 	
 }

@@ -1,7 +1,5 @@
 package sqelevator;
 
-import sqelevator.Elevator.ElevatorDirection;
-import sqelevator.Elevator.ElevatorDoorStatus;
 import java.rmi.RemoteException;
 
 /**
