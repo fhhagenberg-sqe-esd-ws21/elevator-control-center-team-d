@@ -8,11 +8,11 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.matcher.control.TextMatchers;
 
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
-@Disabled
 public class AppTest {
     /**
      * Will be called with {@code @Before} semantics, i. e. before each test method.
@@ -30,18 +30,19 @@ public class AppTest {
      */
     @Test
     public void testButtonWithText(FxRobot robot) {
-        FxAssert.verifyThat(".button", LabeledMatchers.hasText("Click me!"));
+        FxAssert.verifyThat("#Stats", TextMatchers.hasText("Stats"));
     }
 
     /**
      * @param robot - Will be injected by the test runner.
      */
+    @Disabled
     @Test
     public void testButtonClick(FxRobot robot) {
         // when:
-        robot.clickOn(".button");
+        // robot.clickOn(".button");
 
         // or (lookup by css class):
-        FxAssert.verifyThat(".button", LabeledMatchers.hasText("Clicked!"));
+        // FxAssert.verifyThat(".button", LabeledMatchers.hasText("Clicked!"));
     }
 }
