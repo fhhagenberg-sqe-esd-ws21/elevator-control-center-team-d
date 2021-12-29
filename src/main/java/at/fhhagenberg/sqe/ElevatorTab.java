@@ -110,7 +110,6 @@ public class ElevatorTab {
             Text floor = new Text(String.valueOf(i));
             Text upRequested = new Text(String.valueOf(mFloors.get(i).isUpButtonPressed()));
             Text downRequested = new Text(String.valueOf(mFloors.get(i).isDownButtonPressed()));
-            ;
 
             grid.add(floor, 5, 4 + i);
             grid.add(upRequested, 6, 4 + i);
