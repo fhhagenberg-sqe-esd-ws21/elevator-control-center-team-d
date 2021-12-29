@@ -62,7 +62,7 @@ public class ElevatorTab {
         Text NextFloorHeader = new Text("Next Floor");
 
         ComboBox comboBox = new ComboBox();
-        for (int i = 1; i <= numOfFloors; i++) {
+        for (int i = 1; i <= mFloors.size(); i++) {
             String Floor = "Floor " + i;
             comboBox.getItems().add(Floor);
         }

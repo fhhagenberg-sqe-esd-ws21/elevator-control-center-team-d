@@ -12,6 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sqelevator.Elevator;
+import sqelevator.Floor;
 
 /**
  * JavaFX App
@@ -148,15 +150,33 @@ public class App extends Application {
      * @return The finished gui Scene
      */
     private Scene createScene() {
-
-        GridPane grid1 = createGrid(1);
-        GridPane grid2 = createGrid(2);
-
         TabPane tabs = new TabPane();
-        Tab tab1 = new Tab("Elevator 1", grid1);
-        Tab tab2 = new Tab("Elevator 2", grid2);
-        tabs.getTabs().add(tab1);
-        tabs.getTabs().add(tab2);
+
+        Elevator e1 = new Elevator(3);
+        Elevator e2 = new Elevator(3);
+        Floor f1 = new Floor();
+        Floor f2 = new Floor();
+        Floor f3 = new Floor();
+        f1.setDownButtonPressed(true);
+        f2.setUpButtonPressed(true);
+        f3.setDownButtonPressed(true);
+        ArrayList<Floor> floors = new ArrayList<>();
+        floors.add(f1);
+        floors.add(f2);
+        floors.add(f3);
+
+        ElevatorTab tab1 = new ElevatorTab(e1, 1, floors);
+        ElevatorTab tab2 = new ElevatorTab(e2, 2, floors);
+
+        /*
+         * GridPane grid1 = createGrid(1);
+         * GridPane grid2 = createGrid(2);
+         * Tab tab1 = new Tab("Elevator 1", grid1);
+         * Tab tab2 = new Tab("Elevator 2", grid2);
+         */
+
+        tabs.getTabs().add(tab1.createTab());
+        tabs.getTabs().add(tab2.createTab());
 
         var scene = new Scene(tabs);
 
