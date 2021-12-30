@@ -1,5 +1,7 @@
 package at.fhhagenberg.sqe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxAssert;
@@ -7,6 +9,7 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.TextMatchers;
+import org.testfx.service.query.NodeQuery;
 
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -28,21 +31,14 @@ public class AppTest {
      * @param robot - Will be injected by the test runner.
      */
     @Test
-    public void testButtonWithText(FxRobot robot) {
-        FxAssert.verifyThat("#Stats", TextMatchers.hasText("Stats"));
-    }
-
-    /**
-     * @param robot - Will be injected by the test runner.
-     */
-    @Test
     public void testGoButtonClick(FxRobot robot) {
-        robot.clickOn("#floorComboBox");
+        robot.clickOn("#floorComboBox1");
+        robot.type(KeyCode.DOWN);
         robot.type(KeyCode.DOWN);
         robot.type(KeyCode.ENTER);
 
-        robot.clickOn("#goButton");
-        
-        FxAssert.verifyThat("#Stats", TextMatchers.hasText("Stats"));
+        robot.clickOn("#goButton1");
+
+        FxAssert.verifyThat("#TargetVal1", TextMatchers.hasText("1"));
     }
 }
