@@ -1,0 +1,22 @@
+/************************
+ * Name: Daniel Herzog
+ * ID:   2010567013
+ * Date: 04.10.2021
+ ************************/
+
+.label {
+    -fx-font-size: 16px;
+}
+
+.header {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.group {
+    -fx-padding: 10px 10px 10px 10px;
+    -fx-border-insets: 10px 0 10px 10px;
+    -fx-background-insets: 10px;
+    -fx-border-width: 1;
+    -fx-border-color: black;
+}
