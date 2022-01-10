@@ -1,11 +1,10 @@
 package sqelevator;
 
-// import java.rmi.RemoteException;
 import java.util.ArrayList;
-// import java.util.HashMap;
 import java.util.List;
-// import java.util.Map;
-// import sqelevator.Elevator;
+
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
@@ -21,6 +20,8 @@ public class ECCDataModel {
 
     private long clockTick;
     private int floorHeight;
+
+    private StringProperty mErrorMsg = new SimpleStringProperty("");
 
     /**
      * Constructor of class ElevatorModel.
@@ -113,6 +114,18 @@ public class ECCDataModel {
 
 
 
+
+    public String getErrorMsg() {
+		return mErrorMsg.get();
+	}
+
+	public void setErrMsg(String errMsg) {		
+		this.mErrorMsg.set(errMsg);
+	}
+
+	public StringProperty mErrorMsgProperty() {
+		return mErrorMsg;
+	}
 
 
 
