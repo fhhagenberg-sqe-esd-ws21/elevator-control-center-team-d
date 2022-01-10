@@ -1,6 +1,11 @@
 package at.fhhagenberg.sqe;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -9,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sqelevator.ECC;
 import sqelevator.Elevator;
 import sqelevator.Floor;
 
@@ -20,9 +26,53 @@ public class App extends Application {
     // Hier: ECCManager instanzieren
     // Layout-Klasse anlegen, die die GUI aufbaut und Manager mitgeben
     // Manager erzeugt ElevatorModel, Updater, ... und hier geben wir es an die GUI
+    private ECC ecc;
+    private Timer timer;
+	private TimerTask timerTask;
+
+    private final int timerPeriodMS = 1000;
 
     @Override
     public void start(Stage stage) {
+
+        // Im ECC wird der RMI-Call ausgeführt und Model + Updater instaziert.
+        // TODO: Zugriff auf Model über den ECC
+        ecc = new ECC();
+        ecc.init();
+
+        // Handle connection problems
+        if (!ecc.isConnected()) {
+            for(int i = 0; i < 3; i++) {
+                System.out.println("Failed to connect to RMI. Retrying...");
+                try {
+                    wait(1000000);
+                    ecc.init();
+                    if (ecc.isConnected()) {
+                        break;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("Failed to connect to RMI. Shutting down.");
+            System.exit(-1);
+        }
+
+        // ScheduledService oder Timer?
+        // https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
+
+        timer = new Timer();
+        timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    ecc.update();
+            }
+        };
+        timer.schedule(timerTask, 0, timerPeriodMS);
+        System.out.println("ECC connected to RMI and timer created.");
+
+
+
         var javaVersion = SystemInfo.javaVersion();
         var javafxVersion = SystemInfo.javafxVersion();
 
@@ -86,7 +136,7 @@ public class App extends Application {
     /**
      * Let her rip
      * 
-     * @param args what do you think it is
+     * @param args args
      */
     public static void main(String[] args) {
         Application.launch();
