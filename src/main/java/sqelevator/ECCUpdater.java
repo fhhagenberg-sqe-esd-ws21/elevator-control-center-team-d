@@ -55,16 +55,44 @@ public class ECCUpdater {
                 floor.setDownButtonPressed(elevatorInterface.getFloorButtonDown(f));
 				
 			}
+
+            model.setClockTick(elevatorInterface.getClockTick());
         }
         catch(RemoteException e) {
-            System.err.println(e.getMessage());
+            model.setErrMsg(e.getMessage());
         }
-
-        try {
-            model.setClockTick(elevatorInterface.getClockTick());
-        } catch(RemoteException e) {
-            System.err.println(e.getMessage());
-        }
-
     }
+
+
+
+    // From ECC to RMI:
+    // Bind these to buttons in GUI
+    public void sendElevatorTarget(int elevator, int floor) {
+        try {
+			elevatorInterface.setTarget(elevator, floor);
+		}
+		catch (Exception e) {
+			model.setErrMsg(e.getMessage());
+		}
+    }
+
+    public void sendServicesFloors(int elevator, int floor, boolean services) {
+        try {
+			elevatorInterface.setServicesFloors(elevator, floor, services);
+		}
+		catch (Exception e) {
+			model.setErrMsg(e.getMessage());
+		}
+    }
+
+    public void sendCommitedDirection(int elevator, ElevatorDirection direction) {
+        try {
+			elevatorInterface.setCommittedDirection(elevator, direction);
+		}
+		catch (Exception e) {
+			model.setErrMsg(e.getMessage());
+		}
+    }
+
+
 }
