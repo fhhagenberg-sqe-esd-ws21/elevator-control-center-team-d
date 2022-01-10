@@ -48,4 +48,12 @@ public class ECC {
         return connected;
     }
 
+    // Access to Model - maybe refine this sometime
+    public ECCDataModel getModel() {
+        if (connected) {
+            return model;
+        }
+        return null;
+    }
+
 }

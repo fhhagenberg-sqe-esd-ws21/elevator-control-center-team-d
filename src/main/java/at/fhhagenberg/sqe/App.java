@@ -71,6 +71,8 @@ public class App extends Application {
         timer.schedule(timerTask, 0, timerPeriodMS);
         System.out.println("ECC connected to RMI and timer created.");
 
+        
+
 
 
         var javaVersion = SystemInfo.javaVersion();
