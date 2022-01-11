@@ -35,27 +35,16 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
-        // Im ECC wird der RMI-Call ausgeführt und Model + Updater instaziert.
-        // TODO: Zugriff auf Model über den ECC
-        ecc = new ECC();
+        // Im ECC wird der RMI-Call ausgeführt und Model + Updater instanziert.
+        ecc = getECC();
         ecc.init();
 
-        // Handle connection problems
+        // Try to reconnect if RMI can't be reached
         if (!ecc.isConnected()) {
-            for(int i = 0; i < 3; i++) {
-                System.out.println("Failed to connect to RMI. Retrying...");
-                try {
-                    wait(1000000);
-                    ecc.init();
-                    if (ecc.isConnected()) {
-                        break;
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            if (!tryReconnect(3)) {
+                System.out.println("Failed to connect to RMI. Shutting down.");
+                System.exit(-1);
             }
-            System.out.println("Failed to connect to RMI. Shutting down.");
-            System.exit(-1);
         }
 
         // ScheduledService oder Timer?
@@ -75,10 +64,11 @@ public class App extends Application {
 
 
 
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
+        // var javaVersion = SystemInfo.javaVersion();
+        // var javafxVersion = SystemInfo.javafxVersion();
 
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        // var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        var label = new Label("Hello, JavaFX.");
         var layout = new BorderPane(label);
         var button = new Button("Click me!");
         button.setOnAction(evt -> button.setText("Clicked!"));
@@ -90,26 +80,9 @@ public class App extends Application {
         stage.setTitle("Elevator Control Center");
         stage.show();
 
-        Task<Void> pollingTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                while (true) { // NOSONAR
-                    Thread.sleep(100);
-                    // fetch new data
-                    Platform.runLater(() -> {
-                        // update model
-                    });
-                }
-            }
-        };
-        new Thread(pollingTask).start();
 
     }
 
-    /**
-     * 
-     * @return The finished gui Scene
-     */
     private Scene createScene() {
         TabPane tabs = new TabPane();
 
@@ -134,6 +107,30 @@ public class App extends Application {
 
         return new Scene(tabs, 640, 480);
     }
+
+    private boolean tryReconnect(int nrTries) {
+        for(int i = 0; i < nrTries; i++) {
+            System.out.println("Failed to connect to RMI. Retrying...");
+            try {
+                wait(1000000);      // 1 sec
+                ecc.init();
+                if (ecc.isConnected()) {
+                    return true;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    // Overwrite this in your test invocation to inject a mocked ECC object
+    protected ECC getECC() {
+        return new ECC();
+    }
+
+
+
 
     /**
      * Let her rip
