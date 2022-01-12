@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sqelevator.ECC;
+import sqelevator.ECCDataModel;
 import sqelevator.Elevator;
 import sqelevator.Floor;
 
@@ -30,7 +32,7 @@ public class App extends Application {
     private Timer timer;
 	private TimerTask timerTask;
 
-    private final int timerPeriodMS = 1000;
+    private final int timerPeriodMS = 10;
 
     @Override
     public void start(Stage stage) {
@@ -54,7 +56,9 @@ public class App extends Application {
         timerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    ecc.update();
+                    Platform.runLater(() -> {
+                        ecc.update();
+                    });
             }
         };
         timer.schedule(timerTask, 0, timerPeriodMS);
@@ -74,7 +78,8 @@ public class App extends Application {
         button.setOnAction(evt -> button.setText("Clicked!"));
         layout.setBottom(button);
 
-        var scene = createScene();
+        // var scene = createDummyScene();
+        var scene = createScene(ecc.getModel());
         scene.getStylesheets().add("style.css");
         stage.setScene(scene);
         stage.setTitle("Elevator Control Center");
@@ -83,7 +88,7 @@ public class App extends Application {
 
     }
 
-    private Scene createScene() {
+    private Scene createDummyScene() {
         TabPane tabs = new TabPane();
 
         Elevator e1 = new Elevator(3);
@@ -108,11 +113,31 @@ public class App extends Application {
         return new Scene(tabs, 800, 350);
     }
 
+    // Take all elevators from the ECCDataModel and create a tab for each one.
+    private Scene createScene(ECCDataModel model) {
+        TabPane tabs = new TabPane();
+
+        List<Elevator> elevators = model.getElevatorList();
+        List<Floor> floors = model.getFloorList();
+
+        for (int i = 0; i < elevators.size(); i++) {
+            ElevatorTab t = new ElevatorTab(elevators.get(i), i+1, floors);
+            tabs.getTabs().add(t.createTab());
+        }
+
+        return new Scene(tabs, 800, 350);
+    }
+    
+    
+    
+    
+    
+    
     private boolean tryReconnect(int nrTries) {
         for(int i = 0; i < nrTries; i++) {
             System.out.println("Failed to connect to RMI. Retrying...");
             try {
-                wait(1000000);      // 1 sec
+                wait(1000);      // 1 sec
                 ecc.init();
                 if (ecc.isConnected()) {
                     return true;

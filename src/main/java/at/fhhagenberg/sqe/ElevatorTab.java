@@ -1,6 +1,7 @@
 package at.fhhagenberg.sqe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -17,13 +18,13 @@ public class ElevatorTab {
     private ArrayList<Floor> mFloors;
     private int mNumber;
 
-    ElevatorTab(Elevator elevator, int elevatorNumber, ArrayList<Floor> floors) {
+    ElevatorTab(Elevator elevator, int elevatorNumber, List<Floor> floors) {
         if (elevatorNumber < 0 || floors.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
         mElevator = elevator;
-        mFloors = floors;
+        mFloors = new ArrayList<Floor>(floors);
         mNumber = elevatorNumber;
     }
 
