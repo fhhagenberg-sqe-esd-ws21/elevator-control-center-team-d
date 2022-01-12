@@ -76,11 +76,11 @@ public class ElevatorTab {
 
 
 
-        // Manuel mode
+        // Manual mode
         GridPane manual = new GridPane();
         manual.getStyleClass().add("group");
-        Label manuelModeHeader = new Label("Manuel Mode");
-        manuelModeHeader.getStyleClass().add("header");
+        Label manualModeHeader = new Label("Manual Mode");
+        manualModeHeader.getStyleClass().add("header");
         Label nextFloorHeader = new Label("Next Floor");
 
         ComboBox<String> comboBox = new ComboBox<>();
@@ -105,7 +105,7 @@ public class ElevatorTab {
         ToggleButton enableAutoMode = new ToggleButton("Automatic Mode");
         enableAutoMode.setDisable(true);
 
-        manual.add(manuelModeHeader, 0, 0);
+        manual.add(manualModeHeader, 0, 0);
         manual.add(nextFloorHeader, 0, 1);
         manual.add(comboBox, 1, 1);
         manual.add(setTarget, 2, 1);
