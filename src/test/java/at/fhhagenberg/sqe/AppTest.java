@@ -2,8 +2,6 @@ package at.fhhagenberg.sqe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import org.junit.jupiter.api.Test;
@@ -12,7 +10,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.control.TextMatchers;
+import org.testfx.util.WaitForAsyncUtils;
 import org.testfx.matcher.control.LabeledMatchers;
 
 import javafx.scene.input.KeyCode;
@@ -24,7 +22,6 @@ import sqelevator.IElevator;
 public class AppTest {
 
     private App app;
-    private MockedIElevator mock;
     private boolean debug = true;
 
     /**
@@ -44,12 +41,9 @@ public class AppTest {
                         @Override
                         protected IElevator getRmiInterface() throws RemoteException  {
                             // This is where the actual mock is injected into the App.
-                            // MockedIElevator provides an interface to configure the 
-                            // values that the mock returns. Change these values here
-                            // if desired and then return the mocked IElevator.
-                            mock = new MockedIElevator();
-                            mock.setup(3, 10);
-                            return mock.getMockedIElevator();
+                            // ElevatorMock implements IElevator with all getters and 
+                            // setters.
+                            return new ElevatorMock(3, 10);
                         }
                     };
                 }
@@ -64,13 +58,16 @@ public class AppTest {
 
     /**
      * @param robot - Will be injected by the test runner.
+     * @throws InterruptedException
      */
     @Test
-    public void testGoButtonClick(FxRobot robot) {
-        robot.clickOn("#floorComboBox1");
+    public void testGoButtonClick(FxRobot robot) throws InterruptedException {
+        robot.clickOn("#floorComboBox0");
         robot.type(KeyCode.DOWN, KeyCode.DOWN, KeyCode.ENTER);
 
-        robot.clickOn("#goButton1");
-        FxAssert.verifyThat("#TargetVal1", LabeledMatchers.hasText("1"));
+        robot.clickOn("#goButton0");
+        // Thread.sleep(20);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#TargetVal0", LabeledMatchers.hasText("2"));
     }
 }
