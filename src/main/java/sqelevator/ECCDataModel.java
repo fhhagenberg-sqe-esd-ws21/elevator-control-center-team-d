@@ -128,10 +128,14 @@ public class ECCDataModel {
 	}
 
 
+    // Returns the elevator list for easy access in GUI
+    public List<Elevator> getElevatorList() {
+        return elevators;
+    }
 
-    
-
-
+    public List<Floor> getFloorList() {
+        return floors;
+    }
 
 
 
