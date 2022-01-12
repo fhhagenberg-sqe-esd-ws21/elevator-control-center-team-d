@@ -16,9 +16,10 @@ public class ElevatorTab {
 
     private Elevator mElevator;
     private ArrayList<Floor> mFloors;
+    private ECCUpdater mUpdater;
     private int mNumber;
 
-    ElevatorTab(Elevator elevator, int elevatorNumber, List<Floor> floors) {
+    ElevatorTab(Elevator elevator, int elevatorNumber, List<Floor> floors, ECCUpdater updater) {
         if (elevatorNumber < 0 || floors.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -26,14 +27,16 @@ public class ElevatorTab {
         mElevator = elevator;
         mFloors = new ArrayList<Floor>(floors);
         mNumber = elevatorNumber;
+        mUpdater = updater;
     }
 
-    private void upDateElevator(int target) {
-        mElevator.setTarget(target);
+    private void updateElevator(int target) {
+        // mElevator.setTarget(target);
+        mUpdater.sendElevatorTarget(mNumber, target);
     }
 
     public Tab createTab() {
-        String tabName = "Elevator " + mNumber;
+        String tabName = "Elevator " + (mNumber+1);
 
         // stats
         GridPane stats = new GridPane();
@@ -52,8 +55,10 @@ public class ElevatorTab {
         payloadVal.textProperty().bind(mElevator.mWeightProperty().asString());
         Label speed = new Label("Speed (m/s): ");
         speedVal.textProperty().bind(mElevator.mSpeedProperty().asString());
+        // Here .add(1) is used to add 1 to the elevator number, so that elevator 0
+        // is represented in the string as "elevator 1"
         Label target = new Label("Target: ");
-        targetVal.textProperty().bind(mElevator.mTargetProperty().asString());
+        targetVal.textProperty().bind((mElevator.mTargetProperty().add(1)).asString());
         Label doorStat = new Label("Door: ");
         doorVal.textProperty().bind(mElevator.mDoorStatusProperty().asString());
 
@@ -87,7 +92,7 @@ public class ElevatorTab {
         comboBox.setId("floorComboBox" + mNumber);
 
         for (int i = 0; i < mFloors.size(); i++) {
-            String floor = "Floor " + i;
+            String floor = "Floor " + (i+1);
             comboBox.getItems().add(floor);
         }
 
@@ -95,7 +100,7 @@ public class ElevatorTab {
         setTarget.setId("goButton" + mNumber);
 
         setTarget.setDisable(true);
-        setTarget.setOnAction(evt -> upDateElevator(comboBox.getSelectionModel().getSelectedIndex()));
+        setTarget.setOnAction(evt -> updateElevator(comboBox.getSelectionModel().getSelectedIndex()));
 
         comboBox.setOnAction(evt -> {
             if(comboBox.getSelectionModel() != null)
@@ -136,7 +141,7 @@ public class ElevatorTab {
         floor.add(downBotton, 2, 0);
 
         for (int i = 0; i < mFloors.size(); i++) {
-            Label floorNum = new Label(String.valueOf(i));
+            Label floorNum = new Label(String.valueOf(i+1));
             Label upRequested = new Label();
             Label downRequested = new Label();
 

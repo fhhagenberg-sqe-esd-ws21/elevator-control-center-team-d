@@ -10,7 +10,6 @@ import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -88,30 +87,7 @@ public class App extends Application {
 
     }
 
-    private Scene createDummyScene() {
-        TabPane tabs = new TabPane();
-
-        Elevator e1 = new Elevator(3);
-        Elevator e2 = new Elevator(3);
-        Floor f1 = new Floor();
-        Floor f2 = new Floor();
-        Floor f3 = new Floor();
-        f1.setDownButtonPressed(true);
-        f2.setUpButtonPressed(true);
-        f3.setDownButtonPressed(true);
-        ArrayList<Floor> floors = new ArrayList<>();
-        floors.add(f1);
-        floors.add(f2);
-        floors.add(f3);
-
-        ElevatorTab tab1 = new ElevatorTab(e1, 1, floors);
-        ElevatorTab tab2 = new ElevatorTab(e2, 2, floors);
-
-        tabs.getTabs().add(tab1.createTab());
-        tabs.getTabs().add(tab2.createTab());
-
-        return new Scene(tabs, 800, 350);
-    }
+    
 
     // Take all elevators from the ECCDataModel and create a tab for each one.
     private Scene createScene(ECCDataModel model) {
@@ -121,15 +97,12 @@ public class App extends Application {
         List<Floor> floors = model.getFloorList();
 
         for (int i = 0; i < elevators.size(); i++) {
-            ElevatorTab t = new ElevatorTab(elevators.get(i), i+1, floors);
+            ElevatorTab t = new ElevatorTab(elevators.get(i), i, floors, ecc.getUpdater());
             tabs.getTabs().add(t.createTab());
         }
 
         return new Scene(tabs, 800, 350);
     }
-    
-    
-    
     
     
     
@@ -153,8 +126,6 @@ public class App extends Application {
     protected ECC getECC() {
         return new ECC();
     }
-
-
 
 
     /**

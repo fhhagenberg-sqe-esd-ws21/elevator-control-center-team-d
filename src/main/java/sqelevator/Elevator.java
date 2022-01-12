@@ -218,9 +218,6 @@ public class Elevator {
 	 * @param speed the speed to set
 	 */
 	public void setSpeed(int speed) {
-		if(speed < 0)
-            throw new IllegalArgumentException();
-		
 		this.mSpeed.set(speed);
 	}
 

@@ -67,4 +67,11 @@ public class ECC {
         return null;
     }
 
+    public ECCUpdater getUpdater() {
+        if (connected) {
+            return updater;
+        }
+        return null;
+    }
+
 }
