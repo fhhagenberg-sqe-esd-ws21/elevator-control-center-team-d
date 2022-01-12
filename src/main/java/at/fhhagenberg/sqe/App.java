@@ -33,24 +33,24 @@ public class App extends Application {
         layout.setBottom(button);
 
         var scene = createScene();
-
+        scene.getStylesheets().add("style.css");
         stage.setScene(scene);
         stage.setTitle("Elevator Control Center");
         stage.show();
 
-        Task<Void> pollingTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                while (true) { // NOSONAR
-                    Thread.sleep(100);
-                    // fetch new data
-                    Platform.runLater(() -> {
-                        // update model
-                    });
-                }
-            }
-        };
-        new Thread(pollingTask).start();
+        // Task<Void> pollingTask = new Task<Void>() {
+        //     @Override
+        //     protected Void call() throws Exception {
+        //         while (true) { // NOSONAR
+        //             Thread.sleep(100);
+        //             // fetch new data
+        //             Platform.runLater(() -> {
+        //                 // update model
+        //             });
+        //         }
+        //     }
+        // };
+        // new Thread(pollingTask).start();
 
     }
 
@@ -80,7 +80,7 @@ public class App extends Application {
         tabs.getTabs().add(tab1.createTab());
         tabs.getTabs().add(tab2.createTab());
 
-        return new Scene(tabs, 640, 480);
+        return new Scene(tabs, 800, 350);
     }
 
     /**
