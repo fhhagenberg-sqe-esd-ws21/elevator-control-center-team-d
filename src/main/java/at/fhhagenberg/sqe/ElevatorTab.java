@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.layout.HBox;
 import sqelevator.*;
 
 public class ElevatorTab {
@@ -35,41 +35,52 @@ public class ElevatorTab {
         String tabName = "Elevator " + mNumber;
 
         // stats
-        Text statsHeader = new Text("Stats");
-        statsHeader.setFill(Color.BLUE);
+        GridPane stats = new GridPane();
+        stats.getStyleClass().add("group");
+        Label statsHeader = new Label("Stats");
+        statsHeader.getStyleClass().add("header");
 
-        Text payloadVal = new Text();
-        Text speedVal = new Text();
-        Text targetVal = new Text();
-        Text doorVal = new Text();
+        Label payloadVal = new Label();
+        Label speedVal = new Label();
+        Label targetVal = new Label();
+        Label doorVal = new Label();
 
         targetVal.setId("TargetVal" + mNumber);
 
-        Text payload = new Text("Payload (kg): ");
+        Label payload = new Label("Payload (kg): ");
         payloadVal.textProperty().bind(mElevator.mWeightProperty().asString());
-        Text speed = new Text("Speed (m/s): ");
+        Label speed = new Label("Speed (m/s): ");
         speedVal.textProperty().bind(mElevator.mSpeedProperty().asString());
-        Text target = new Text("Target: ");
+        Label target = new Label("Target: ");
         targetVal.textProperty().bind(mElevator.mTargetProperty().asString());
-        Text doorStat = new Text("Door: ");
+        Label doorStat = new Label("Door: ");
         doorVal.textProperty().bind(mElevator.mDoorStatusProperty().asString());
-        
 
-        GridPane grid = new GridPane();
-        grid.add(statsHeader, 0, 0);
-        grid.add(payload, 0, 1);
-        grid.add(payloadVal, 1, 1);
-        grid.add(speed, 0, 2);
-        grid.add(speedVal, 1, 2);
-        grid.add(doorStat, 0, 3);
-        grid.add(doorVal, 1, 3);
-        grid.add(target, 0, 4);
-        grid.add(targetVal, 1, 4);
+        // Logs
+        Label logHeader = new Label("LastError");
+        Label lastError = new Label("no Errors"); // TODO
+        
+        stats.add(statsHeader, 0, 0);
+        stats.add(payload, 0, 1);
+        stats.add(payloadVal, 1, 1);
+        stats.add(speed, 0, 2);
+        stats.add(speedVal, 1, 2);
+        stats.add(doorStat, 0, 3);
+        stats.add(doorVal, 1, 3);
+        stats.add(target, 0, 4);
+        stats.add(targetVal, 1, 4);
+        stats.add(logHeader, 0, 5);
+        stats.add(lastError, 1, 5);
+
+
+
 
         // Manuel mode
-        Text manuelModeHeader = new Text("Manuel Mode");
-        manuelModeHeader.setFill(Color.BLUE);
-        Text nextFloorHeader = new Text("Next Floor");
+        GridPane manual = new GridPane();
+        manual.getStyleClass().add("group");
+        Label manuelModeHeader = new Label("Manuel Mode");
+        manuelModeHeader.getStyleClass().add("header");
+        Label nextFloorHeader = new Label("Next Floor");
 
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.setId("floorComboBox" + mNumber);
@@ -93,49 +104,54 @@ public class ElevatorTab {
         ToggleButton enableAutoMode = new ToggleButton("Automatic Mode");
         enableAutoMode.setDisable(true);
 
-        grid.add(manuelModeHeader, 3, 0);
-        grid.add(nextFloorHeader, 3, 1);
-        grid.add(comboBox, 3, 2);
-        grid.add(setTarget, 4, 2);
-        grid.add(enableAutoMode, 3, 3);
+        manual.add(manuelModeHeader, 0, 0);
+        manual.add(nextFloorHeader, 0, 1);
+        manual.add(comboBox, 1, 1);
+        manual.add(setTarget, 2, 1);
+        manual.add(enableAutoMode, 0, 2);
+
+
 
         // commited direction
-        Text directionHeader = new Text("Commited Direction");
-        directionHeader.setFill(Color.BLUE);
-        Text directionText = new Text("UP");
-
-        grid.add(directionHeader, 5, 0);
-        grid.add(directionText, 5, 1);
-
-        // Logs
-        Text logHeader = new Text("LastError");
-        Text lastError = new Text("no Errors"); // TODO
-        grid.add(logHeader, 3, 4);
-        grid.add(lastError, 3, 5);
+        GridPane direction = new GridPane();
+        direction.getStyleClass().add("group");
+        Label directionHeader = new Label("DIR");
+        directionHeader.getStyleClass().add("header");
+        Label directionText = new Label("UP");
+        direction.add(directionHeader, 0, 0);
+        direction.add(directionText, 0, 1);
+        
 
         // Floor Status
-        Text floorLabel = new Text("Floor");
-        Text upBotton = new Text("Up Button");
-        Text downBotton = new Text("Down Button");
+        GridPane floor = new GridPane();
+        floor.getStyleClass().add("group");
 
-        grid.add(floorLabel, 5, 3);
-        grid.add(upBotton, 6, 3);
-        grid.add(downBotton, 7, 3);
+        Label floorLabel = new Label("Floor");
+        Label upBotton = new Label("Up");
+        Label downBotton = new Label("Down");
+
+        floor.add(floorLabel, 0, 0);
+        floor.add(upBotton, 1, 0);
+        floor.add(downBotton, 2, 0);
 
         for (int i = 0; i < mFloors.size(); i++) {
-            Text floor = new Text(String.valueOf(i));
-            Text upRequested = new Text();
-            Text downRequested = new Text();
+            Label floorNum = new Label(String.valueOf(i));
+            Label upRequested = new Label();
+            Label downRequested = new Label();
 
             upRequested.textProperty().bind(mFloors.get(i).upButtonPressedProperty().asString());
             downRequested.textProperty().bind(mFloors.get(i).downButtonPressedProperty().asString());
 
-            grid.add(floor, 5, 4 + i);
-            grid.add(upRequested, 6, 4 + i);
-            grid.add(downRequested, 7, 4 + i);
+            floor.add(floorNum, 0, 1 + i);
+            floor.add(upRequested, 1, 1 + i);
+            floor.add(downRequested, 2, 1 + i);
         }
 
-        Tab tab = new Tab(tabName, grid);
+
+        HBox box = new HBox();
+        box.getChildren().addAll(stats,manual,direction,floor);
+
+        Tab tab = new Tab(tabName, box);
 
         tab.setClosable(false);
 

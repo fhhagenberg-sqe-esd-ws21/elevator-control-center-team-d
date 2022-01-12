@@ -75,7 +75,7 @@ public class App extends Application {
         layout.setBottom(button);
 
         var scene = createScene();
-
+        scene.getStylesheets().add("style.css");
         stage.setScene(scene);
         stage.setTitle("Elevator Control Center");
         stage.show();
@@ -105,7 +105,7 @@ public class App extends Application {
         tabs.getTabs().add(tab1.createTab());
         tabs.getTabs().add(tab2.createTab());
 
-        return new Scene(tabs, 640, 480);
+        return new Scene(tabs, 800, 350);
     }
 
     private boolean tryReconnect(int nrTries) {
