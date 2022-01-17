@@ -17,4 +17,11 @@ This project contains a GUI for an Elevator Controll Center that is implemented 
 3. Congratulations! Now you can play around and feel like a real elevator manager.  
 
 ## How the project was managed
+To ensure quality, we establishes a few measures.
+First of all, we established automatic builds. A build only passes, if all the Unit Tests  and also the automatic analysis in Sonarcloud are successfull.
+
+The Masterbranch is also protected against merges. It is only possible to merge a branch to the master trough a pull request. 
+Our process for pull requests was as follows: As soon as somebody finished a feature and the Unit Tests and SonarCloud analysis passed, he created a pull request.
+Then an other Team member made a Code review (usually together with the developer). 
+If issues were found, they had to be fixed and otherwise the pull request was accepted. 
 
