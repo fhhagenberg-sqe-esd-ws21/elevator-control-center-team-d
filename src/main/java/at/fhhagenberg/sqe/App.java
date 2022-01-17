@@ -128,6 +128,17 @@ public class App extends Application {
     }
 
 
+    // This is needed so that the timer stops when the application is closed, 
+    // otherwise timer task will continue running.
+    @Override
+    public void stop() throws Exception {
+    	if (timer != null) {
+        	timer.cancel();
+    	}    	
+    	super.stop();
+    }
+
+
     /**
      * Let her rip
      * 
