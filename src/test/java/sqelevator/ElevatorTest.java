@@ -167,12 +167,6 @@ class ElevatorTest {
 	}
 
 	@Test
-	void TestSetSpeedThrows()
-	{		
-		assertThrows(IllegalArgumentException.class,() -> {e.setSpeed(-100);});
-	}
-
-	@Test
 	void TestSetPositionThrows()
 	{		
 		assertThrows(IllegalArgumentException.class,() -> {e.setPosition(-100);});

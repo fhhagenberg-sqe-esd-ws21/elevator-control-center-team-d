@@ -1,18 +1,26 @@
 package at.fhhagenberg.sqe;
 
+import java.rmi.RemoteException;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.util.WaitForAsyncUtils;
 import org.testfx.matcher.control.LabeledMatchers;
 
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import sqelevator.ECC;
+import sqelevator.IElevator;
 
 @ExtendWith(ApplicationExtension.class)
 public class AppTest {
+
+    private App app;
+
     /**
      * Will be called with {@code @Before} semantics, i. e. before each test method.
      *
@@ -20,19 +28,36 @@ public class AppTest {
      */
     @Start
     public void start(Stage stage) {
-        var app = new App();
+        app = new App() {
+            @Override
+            protected ECC getECC() {
+                return new ECC() {
+                    @Override
+                    protected IElevator getRmiInterface() throws RemoteException  {
+                        // This is where the actual mock is injected into the App.
+                        // ElevatorMock implements IElevator with all getters and 
+                        // setters.
+                        return new ElevatorMock(3, 10);
+                    }
+                };
+            }
+        };
+
         app.start(stage);
     }
 
     /**
      * @param robot - Will be injected by the test runner.
+     * @throws InterruptedException
      */
     @Test
-    public void testGoButtonClick(FxRobot robot) {
-        robot.clickOn("#floorComboBox1");
+    public void testGoButtonClick(FxRobot robot) throws InterruptedException {
+        robot.clickOn("#floorComboBox0");
         robot.type(KeyCode.DOWN, KeyCode.DOWN, KeyCode.ENTER);
 
-        robot.clickOn("#goButton1");
-        FxAssert.verifyThat("#TargetVal1", LabeledMatchers.hasText("1"));
+        robot.clickOn("#goButton0");
+        // Thread.sleep(20);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#TargetVal0", LabeledMatchers.hasText("2"));
     }
 }

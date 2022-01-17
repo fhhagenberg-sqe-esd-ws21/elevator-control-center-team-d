@@ -91,5 +91,19 @@ public class ECCDataModelTest {
 		model.setClockTick(50);
 		assertEquals(50, model.getClockTick());
 	}
+
+	@Test
+	void test_getSetErrMsg()
+	{
+		model.setErrMsg("Anaximander");
+		assertEquals("Anaximander", model.getErrorMsg());
+	}
+
+	@Test
+	void test_checkErrMsgProperty()
+	{
+		model.setErrMsg("Anaximander");
+		assertEquals("Anaximander", model.mErrorMsgProperty().get());
+	}
 		
 }

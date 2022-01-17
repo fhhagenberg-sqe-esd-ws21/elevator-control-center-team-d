@@ -1,7 +1,10 @@
 package at.fhhagenberg.sqe;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javafx.beans.binding.Bindings;
+import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -15,24 +18,27 @@ public class ElevatorTab {
 
     private Elevator mElevator;
     private ArrayList<Floor> mFloors;
+    private ECCUpdater mUpdater;
     private int mNumber;
 
-    ElevatorTab(Elevator elevator, int elevatorNumber, ArrayList<Floor> floors) {
+    ElevatorTab(Elevator elevator, int elevatorNumber, List<Floor> floors, ECCUpdater updater) {
         if (elevatorNumber < 0 || floors.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
         mElevator = elevator;
-        mFloors = floors;
+        mFloors = new ArrayList<Floor>(floors);
         mNumber = elevatorNumber;
+        mUpdater = updater;
     }
 
-    private void upDateElevator(int target) {
-        mElevator.setTarget(target);
+    private void updateElevator(int target) {
+        // mElevator.setTarget(target);
+        mUpdater.sendElevatorTarget(mNumber, target);
     }
 
     public Tab createTab() {
-        String tabName = "Elevator " + mNumber;
+        String tabName = "Elevator " + (mNumber+1);
 
         // stats
         GridPane stats = new GridPane();
@@ -51,8 +57,10 @@ public class ElevatorTab {
         payloadVal.textProperty().bind(mElevator.mWeightProperty().asString());
         Label speed = new Label("Speed (m/s): ");
         speedVal.textProperty().bind(mElevator.mSpeedProperty().asString());
+        // Here .add(1) is used to add 1 to the elevator number, so that elevator 0
+        // is represented in the string as "elevator 1"
         Label target = new Label("Target: ");
-        targetVal.textProperty().bind(mElevator.mTargetProperty().asString());
+        targetVal.textProperty().bind((mElevator.mTargetProperty().add(1)).asString());
         Label doorStat = new Label("Door: ");
         doorVal.textProperty().bind(mElevator.mDoorStatusProperty().asString());
 
@@ -75,18 +83,18 @@ public class ElevatorTab {
 
 
 
-        // Manuel mode
+        // Manual mode
         GridPane manual = new GridPane();
         manual.getStyleClass().add("group");
-        Label manuelModeHeader = new Label("Manuel Mode");
-        manuelModeHeader.getStyleClass().add("header");
+        Label manualModeHeader = new Label("Manual Mode");
+        manualModeHeader.getStyleClass().add("header");
         Label nextFloorHeader = new Label("Next Floor");
 
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.setId("floorComboBox" + mNumber);
 
         for (int i = 0; i < mFloors.size(); i++) {
-            String floor = "Floor " + i;
+            String floor = "Floor " + (i+1);
             comboBox.getItems().add(floor);
         }
 
@@ -94,7 +102,7 @@ public class ElevatorTab {
         setTarget.setId("goButton" + mNumber);
 
         setTarget.setDisable(true);
-        setTarget.setOnAction(evt -> upDateElevator(comboBox.getSelectionModel().getSelectedIndex()));
+        setTarget.setOnAction(evt -> updateElevator(comboBox.getSelectionModel().getSelectedIndex()));
 
         comboBox.setOnAction(evt -> {
             if(comboBox.getSelectionModel() != null)
@@ -104,7 +112,7 @@ public class ElevatorTab {
         ToggleButton enableAutoMode = new ToggleButton("Automatic Mode");
         enableAutoMode.setDisable(true);
 
-        manual.add(manuelModeHeader, 0, 0);
+        manual.add(manualModeHeader, 0, 0);
         manual.add(nextFloorHeader, 0, 1);
         manual.add(comboBox, 1, 1);
         manual.add(setTarget, 2, 1);
@@ -117,30 +125,42 @@ public class ElevatorTab {
         direction.getStyleClass().add("group");
         Label directionHeader = new Label("DIR");
         directionHeader.getStyleClass().add("header");
-        Label directionText = new Label("UP");
+        Label directionText = new Label("");
+        directionText.textProperty().bind(mElevator.mCommittedDirectionProperty().asString());
         direction.add(directionHeader, 0, 0);
         direction.add(directionText, 0, 1);
-        
 
+        
         // Floor Status
         GridPane floor = new GridPane();
         floor.getStyleClass().add("group");
+        floor.getStyleClass().add("floorButtons");
 
         Label floorLabel = new Label("Floor");
-        Label upBotton = new Label("Up");
-        Label downBotton = new Label("Down");
+        Label upLabel = new Label("Up");
+        Label downLabel = new Label("Down");
 
         floor.add(floorLabel, 0, 0);
-        floor.add(upBotton, 1, 0);
-        floor.add(downBotton, 2, 0);
+        floor.add(upLabel, 1, 0);
+        floor.add(downLabel, 2, 0);
 
         for (int i = 0; i < mFloors.size(); i++) {
-            Label floorNum = new Label(String.valueOf(i));
+            Label floorNum = new Label(String.valueOf(i+1));
             Label upRequested = new Label();
             Label downRequested = new Label();
 
-            upRequested.textProperty().bind(mFloors.get(i).upButtonPressedProperty().asString());
-            downRequested.textProperty().bind(mFloors.get(i).downButtonPressedProperty().asString());
+            upRequested.textProperty().bind(
+                Bindings.when(mFloors.get(i).upButtonPressedProperty())
+                        .then("▲")
+                        .otherwise(""));
+            downRequested.textProperty().bind(
+                Bindings.when(mFloors.get(i).downButtonPressedProperty())
+                        .then("▼")
+                        .otherwise(""));
+
+            GridPane.setHalignment(floorNum, HPos.CENTER);
+            GridPane.setHalignment(upRequested, HPos.CENTER);
+            GridPane.setHalignment(downRequested, HPos.CENTER);
 
             floor.add(floorNum, 0, 1 + i);
             floor.add(upRequested, 1, 1 + i);
