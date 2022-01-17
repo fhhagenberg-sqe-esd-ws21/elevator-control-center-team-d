@@ -5,6 +5,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import javafx.stage.Stage;
+import sqelevator.ECC;
 
 @ExtendWith(ApplicationExtension.class)
 public class AppReconnectTest {
@@ -18,7 +19,18 @@ public class AppReconnectTest {
      */
     @Start
     public void start(Stage stage) {
-        app = new App();
+        app = new App(){
+            @Override
+            protected ECC getECC() {
+                return new ECC() {
+                    @Override
+                    public void init()  {
+                        return;
+                    }
+                };
+            }
+        };
+        
         app.start(stage);
     }
 
