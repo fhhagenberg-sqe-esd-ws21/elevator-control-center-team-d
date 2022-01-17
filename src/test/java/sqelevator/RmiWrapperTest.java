@@ -60,10 +60,16 @@ class RmiWrapperTest {
         when(mockedInterface.getElevatorNum()).thenReturn(5);
 		when(mockedInterface.getFloorNum()).thenReturn(10);
 		when(mockedInterface.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_UP);
+		when(mockedInterface.getCommittedDirection(1)).thenReturn(IElevator.ELEVATOR_DIRECTION_DOWN);
+		when(mockedInterface.getCommittedDirection(2)).thenReturn(IElevator.ELEVATOR_DIRECTION_UNCOMMITTED);
         RmiWrapper rmiWrapper = new RmiWrapper(mockedInterface);
 
         rmiWrapper.setCommittedDirection(0, ElevatorDirection.UP);
+        rmiWrapper.setCommittedDirection(1, ElevatorDirection.DOWN);
+        rmiWrapper.setCommittedDirection(2, ElevatorDirection.UNCOMMITTED);
         assertEquals(ElevatorDirection.UP, rmiWrapper.getCommittedDirection(0));
+        assertEquals(ElevatorDirection.DOWN, rmiWrapper.getCommittedDirection(1));
+        assertEquals(ElevatorDirection.UNCOMMITTED, rmiWrapper.getCommittedDirection(2));
 	}
 
     @Test
@@ -78,7 +84,7 @@ class RmiWrapperTest {
 	}
 
     @Test
-	void testSetTarger() throws RemoteException {
+	void testSetTarget() throws RemoteException {
         when(mockedInterface.getElevatorNum()).thenReturn(5);
 		when(mockedInterface.getFloorNum()).thenReturn(10);
 		when(mockedInterface.getTarget(0)).thenReturn(5);
