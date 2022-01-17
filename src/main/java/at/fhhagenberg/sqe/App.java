@@ -44,7 +44,8 @@ public class App extends Application {
         if (!ecc.isConnected()) {
             if (!tryReconnect(3)) {
                 System.out.println("Failed to connect to RMI. Shutting down.");
-                System.exit(-1);
+                // System.exit(-1);
+                return;
             }
         }
 
@@ -107,18 +108,18 @@ public class App extends Application {
     
     
     private boolean tryReconnect(int nrTries) {
-        for(int i = 0; i < nrTries; i++) {
+        // try {
+            // for(int i = 0; i < nrTries; i++) {
+            // wait(1000);      // 1 sec
             System.out.println("Failed to connect to RMI. Retrying...");
-            try {
-                wait(1000);      // 1 sec
                 ecc.init();
                 if (ecc.isConnected()) {
                     return true;
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        // }
+        // } catch (InterruptedException e) {
+        //     System.out.print(e.getMessage());
+        // }
         return false;
     }
 

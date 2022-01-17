@@ -1,7 +1,5 @@
 package at.fhhagenberg.sqe;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.rmi.RemoteException;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +20,6 @@ import sqelevator.IElevator;
 public class AppTest {
 
     private App app;
-    private boolean debug = true;
 
     /**
      * Will be called with {@code @Before} semantics, i. e. before each test method.
@@ -31,27 +28,20 @@ public class AppTest {
      */
     @Start
     public void start(Stage stage) {
-
-        if (debug) {
-            System.out.println("*** Running App in debug mode ***");
-            app = new App() {
-                @Override
-                protected ECC getECC() {
-                    return new ECC() {
-                        @Override
-                        protected IElevator getRmiInterface() throws RemoteException  {
-                            // This is where the actual mock is injected into the App.
-                            // ElevatorMock implements IElevator with all getters and 
-                            // setters.
-                            return new ElevatorMock(3, 10);
-                        }
-                    };
-                }
-            };
-        }
-        else {
-            app = new App();
-        }
+        app = new App() {
+            @Override
+            protected ECC getECC() {
+                return new ECC() {
+                    @Override
+                    protected IElevator getRmiInterface() throws RemoteException  {
+                        // This is where the actual mock is injected into the App.
+                        // ElevatorMock implements IElevator with all getters and 
+                        // setters.
+                        return new ElevatorMock(3, 10);
+                    }
+                };
+            }
+        };
 
         app.start(stage);
     }
