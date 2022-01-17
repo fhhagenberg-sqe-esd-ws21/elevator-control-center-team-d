@@ -1,9 +1,5 @@
 package at.fhhagenberg.sqe;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,7 +27,7 @@ public class App extends Application {
     private Timer timer;
 	private TimerTask timerTask;
 
-    private final int timerPeriodMS = 10;
+    private static final int timerPeriodMS = 10;
 
     @Override
     public void start(Stage stage) {
@@ -66,19 +62,12 @@ public class App extends Application {
 
         
 
-
-
-        // var javaVersion = SystemInfo.javaVersion();
-        // var javafxVersion = SystemInfo.javafxVersion();
-
-        // var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
         var label = new Label("Hello, JavaFX.");
         var layout = new BorderPane(label);
         var button = new Button("Click me!");
         button.setOnAction(evt -> button.setText("Clicked!"));
         layout.setBottom(button);
 
-        // var scene = createDummyScene();
         var scene = createScene(ecc.getModel());
         scene.getStylesheets().add("style.css");
         stage.setScene(scene);
@@ -108,18 +97,13 @@ public class App extends Application {
     
     
     private boolean tryReconnect(int nrTries) {
-        // try {
-            // for(int i = 0; i < nrTries; i++) {
-            // wait(1000);      // 1 sec
-            System.out.println("Failed to connect to RMI. Retrying...");
-                ecc.init();
-                if (ecc.isConnected()) {
-                    return true;
-                }
-        // }
-        // } catch (InterruptedException e) {
-        //     System.out.print(e.getMessage());
-        // }
+
+        System.out.println("Failed to connect to RMI. Retrying...");
+        ecc.init();
+        if (ecc.isConnected()) {
+            return true;
+        }
+        
         return false;
     }
 
