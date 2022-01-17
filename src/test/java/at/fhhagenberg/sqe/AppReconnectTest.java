@@ -1,5 +1,6 @@
 package at.fhhagenberg.sqe;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
@@ -11,14 +12,16 @@ import sqelevator.ECC;
 public class AppReconnectTest {
 
     private App app;
+    private Stage s;
 
     /**
      * Will be called with {@code @Before} semantics, i. e. before each test method.
      *
      * @param stage - Will be injected by the test runner.
+     * @throws Exception
      */
     @Start
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
         app = new App(){
             @Override
             protected ECC getECC() {
@@ -31,7 +34,8 @@ public class AppReconnectTest {
             }
         };
         
-        app.start(stage);
+        s = stage;
+        // app.start(stage);
     }
 
     /**
@@ -48,4 +52,14 @@ public class AppReconnectTest {
     //     WaitForAsyncUtils.waitForFxEvents();
     //     FxAssert.verifyThat("#TargetVal0", LabeledMatchers.hasText("2"));
     // }
+
+    @Test
+    void testStart() {
+        app.start(s);
+    }
+
+    @Test
+    void testStop() throws Exception {
+        app.stop();
+    }
 }

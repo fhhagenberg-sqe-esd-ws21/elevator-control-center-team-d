@@ -34,6 +34,16 @@ public class ECCTest {
         });
     }
 
+    // Note: When RMI server is down, this will lead to an exception in
+    // getRmiInterface() which is catched in ECC.init()
+    @Test
+    void testConnectToRMI() {
+        assertDoesNotThrow(() -> {
+            ecc = new ECC();
+            ecc.init();
+        });
+    }
+
     @Test
     void testHandleNotBoundException() {
         assertDoesNotThrow(() -> {
@@ -91,4 +101,19 @@ public class ECCTest {
         });            
     }
     
+    @Test
+    void testGetModel() {
+        assertDoesNotThrow(() -> {
+            ecc = new ECC() {
+                @Override
+                protected IElevator getRmiInterface() throws RemoteException  {
+                    return new ElevatorMock(3, 10);
+                }
+            };
+            assertNull(ecc.getModel());
+
+            ecc.init();
+            assertNotNull(ecc.getModel());
+        });            
+    }
 }
