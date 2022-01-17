@@ -13,7 +13,7 @@ This project contains a GUI for an Elevator Controll Center that is implemented 
 1. The latest version of the Elevator Controll Center can be found in the releases section of the repository. Simply download jar file from the latest release.
 2. To Run the application two steps are needed:
    1. Start the Simulator and setup the building as you like
-   2. open a command prompt, navigate to the ECC.jar file and type java -jar ECC.jar
+   2. Double Click on the ECC.jar
 3. Congratulations! Now you can play around and feel like a real elevator manager.  
 
 ## How the project was managed
