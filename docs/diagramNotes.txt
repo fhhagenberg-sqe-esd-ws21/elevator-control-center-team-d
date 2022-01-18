@@ -1,0 +1,29 @@
+connectionDiagram.png
+=====================
+- Überklasse ECC beinhaltet alle anderen Klassen
+- ECC führt beim Starten den RMI Call zum ElevatorSimulator durch
+	- Bei Erfolg: IElevator wird vom RMI Call zurückgeliefert, dieses wir in Klasse RmiWrapper gekapselt
+	- Bei Fehlschlag: Reconnect wird versucht
+- ECCFactory benutzt die Daten vom RmiWrapper um das Datenmodell ECCDataModel zu erzeugen
+- ECCDataModel beinhaltet einen Liste von Elevators und Floors
+	- Elevator und Floor sind mit Properties ausgestattet, um die Werte später an die GUI zu binden
+- ECCUpdater fragt den RmiWrapper zyklisch ab und schreibt die neuen Werte in das ECCDataModel
+- ECCUpdater kann Set-Kommandos an den RMI Server schicken
+
+
+
+guiDiagram.png
+==============
+- GUI wird durch Klasse App.java ausgeführt
+- In der GUI-Klasse wird eine Instanz von ECC erzeugt, diese stellt Verbindung zum RMI Server her
+- Die Properties des ECCDataModels werden an die Felder in der GUI gebunden, d.h. der Text aktualisiert sich automatisch, wenn die Werte im Datenmodell sich ändern
+- Ein Timertask in der GUI-Klasse ruft den ECCUpdater alle 10ms auf, dieser holt neue Werte vom Simulator
+- Ein Knopfdruck in der GUI wird über den ECCUpdater an den RMI Server gesendet, um bspw. einen neuen Wert zu setzen
+
+
+
+Hinweise zum Testen
+===================
+- Im End-to-End-Test wird die Klasse ECC überschrieben, um statt dem RMI Call einen gemockten IElevator zu verwenden
+- Einzelne Funktionen in GUI und ECC können ebenfalls überschrieben werden, um bspw. Exceptions zu triggern
+
