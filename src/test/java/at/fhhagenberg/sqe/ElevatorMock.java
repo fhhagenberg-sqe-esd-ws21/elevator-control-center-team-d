@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.rmi.RemoteException;
 
-import sqelevator.ElevatorDoorStatus;
 import sqelevator.IElevator;
 
 public class ElevatorMock implements IElevator {
@@ -214,39 +213,39 @@ public class ElevatorMock implements IElevator {
 
 
 
-    public void setElevatorAccel(int elevatorNumber, int acc) throws RemoteException {
+    public void setAccel(int elevatorNumber, int acc) throws RemoteException {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         accelerations[elevatorNumber] = acc;
     }
 
-    public void setElevatorButton(int elevatorNumber, int floor, boolean button) throws RemoteException {
+    public void setStopButton(int elevatorNumber, int floor, boolean button) throws RemoteException {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         assertTrue(floor >= 0 && floor < floorNum);
 
         stopButtons[elevatorNumber][floor] = button;
     }
 
-    public void setElevatorFloor(int elevatorNumber, int floor) throws RemoteException {
+    public void setFloor(int elevatorNumber, int floor) throws RemoteException {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         floors[elevatorNumber] = floor;
     }
 
-    public void setElevatorPosition(int elevatorNumber, int pos) throws RemoteException {
+    public void setPosition(int elevatorNumber, int pos) throws RemoteException {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         positions[elevatorNumber] = pos;
     }
 
-    public void setElevatorSpeed(int elevatorNumber, int speed) throws RemoteException {
+    public void setSpeed(int elevatorNumber, int speed) throws RemoteException {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         speeds[elevatorNumber] = speed;
     }
 
-    public void setElevatorWeight(int elevatorNumber, int weight) throws RemoteException {
+    public void setWeight(int elevatorNumber, int weight) throws RemoteException {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         weights[elevatorNumber] = weight;
     }
 
-    public void setElevatorCapacity(int elevatorNumber, int cap) throws RemoteException {
+    public void setCapacity(int elevatorNumber, int cap) throws RemoteException {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         capacities[elevatorNumber] = cap;
     }
