@@ -20,6 +20,7 @@ import sqelevator.IElevator;
 public class AppTest {
 
     private App app;
+    private ElevatorMock elevatorMock;
 
     /**
      * Will be called with {@code @Before} semantics, i. e. before each test method.
@@ -37,7 +38,8 @@ public class AppTest {
                         // This is where the actual mock is injected into the App.
                         // ElevatorMock implements IElevator with all getters and 
                         // setters.
-                        return new ElevatorMock(3, 10);
+                        elevatorMock = new ElevatorMock(3, 10, 100);
+                        return elevatorMock;
                     }
                 };
             }
@@ -59,5 +61,68 @@ public class AppTest {
         // Thread.sleep(20);
         WaitForAsyncUtils.waitForFxEvents();
         FxAssert.verifyThat("#TargetVal0", LabeledMatchers.hasText("2"));
+    }
+
+    @Test
+    public void testPayload(FxRobot robot) throws InterruptedException, RemoteException {
+        elevatorMock.setWeight(0, 4711);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#Payload0", LabeledMatchers.hasText("4711"));
+    }
+
+    @Test
+    public void testSpeed(FxRobot robot) throws InterruptedException, RemoteException {
+        elevatorMock.setSpeed(0, 4711);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#Speed0", LabeledMatchers.hasText("4711"));
+    }
+
+    @Test
+    public void testDoor(FxRobot robot) throws InterruptedException, RemoteException {
+        elevatorMock.setDoorStatus(0, IElevator.ELEVATOR_DOORS_OPEN);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#Door0", LabeledMatchers.hasText("Open"));
+
+        elevatorMock.setDoorStatus(0, IElevator.ELEVATOR_DOORS_CLOSED);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#Door0", LabeledMatchers.hasText("Closed"));
+
+        elevatorMock.setDoorStatus(0, IElevator.ELEVATOR_DOORS_OPENING);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#Door0", LabeledMatchers.hasText("Opening"));
+
+        elevatorMock.setDoorStatus(0, IElevator.ELEVATOR_DOORS_CLOSING);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#Door0", LabeledMatchers.hasText("Closing"));
+    }
+
+    @Test
+    public void testFloorDir(FxRobot robot) throws InterruptedException, RemoteException {
+
+        elevatorMock.setFloorButtonDown(0, true);
+        elevatorMock.setFloorButtonDown(1, false);
+        elevatorMock.setFloorButtonUp(0, false);
+        elevatorMock.setFloorButtonUp(1, true);
+        WaitForAsyncUtils.waitForFxEvents();
+        
+        FxAssert.verifyThat("#Floor0,0,DOWN", LabeledMatchers.hasText("▼"));
+        FxAssert.verifyThat("#Floor0,1,DOWN", LabeledMatchers.hasText(""));
+        FxAssert.verifyThat("#Floor0,0,UP", LabeledMatchers.hasText(""));
+        FxAssert.verifyThat("#Floor0,1,UP", LabeledMatchers.hasText("▲"));
+    }
+
+    @Test
+    public void testCommitedDir(FxRobot robot) throws InterruptedException, RemoteException {
+        elevatorMock.setCommittedDirection(0, IElevator.ELEVATOR_DIRECTION_UP);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#CommitedDir0", LabeledMatchers.hasText("Up"));
+
+        elevatorMock.setCommittedDirection(0, IElevator.ELEVATOR_DIRECTION_DOWN);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#CommitedDir0", LabeledMatchers.hasText("Down"));
+
+        elevatorMock.setCommittedDirection(0, IElevator.ELEVATOR_DIRECTION_UNCOMMITTED);
+        WaitForAsyncUtils.waitForFxEvents();
+        FxAssert.verifyThat("#CommitedDir0", LabeledMatchers.hasText("Uncommitted"));
     }
 }

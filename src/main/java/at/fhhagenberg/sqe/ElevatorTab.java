@@ -55,14 +55,17 @@ public class ElevatorTab {
 
         Label payload = new Label("Payload (kg): ");
         payloadVal.textProperty().bind(mElevator.mWeightProperty().asString());
+        payloadVal.setId("Payload" + mNumber);
         Label speed = new Label("Speed (m/s): ");
         speedVal.textProperty().bind(mElevator.mSpeedProperty().asString());
+        speedVal.setId("Speed" + mNumber);
         // Here .add(1) is used to add 1 to the elevator number, so that elevator 0
         // is represented in the string as "elevator 1"
         Label target = new Label("Target: ");
         targetVal.textProperty().bind((mElevator.mTargetProperty().add(1)).asString());
         Label doorStat = new Label("Door: ");
         doorVal.textProperty().bind(mElevator.mDoorStatusProperty().asString());
+        doorVal.setId("Door" + mNumber);
 
         // Logs
         Label logHeader = new Label("LastError");
@@ -127,6 +130,7 @@ public class ElevatorTab {
         directionHeader.getStyleClass().add("header");
         Label directionText = new Label("");
         directionText.textProperty().bind(mElevator.mCommittedDirectionProperty().asString());
+        directionText.setId("CommitedDir" + mNumber);
         direction.add(directionHeader, 0, 0);
         direction.add(directionText, 0, 1);
 
@@ -157,6 +161,9 @@ public class ElevatorTab {
                 Bindings.when(mFloors.get(i).downButtonPressedProperty())
                         .then("▼")
                         .otherwise(""));
+
+            upRequested.setId("Floor"+mNumber+","+i+",UP");
+            downRequested.setId("Floor"+mNumber+","+i+",DOWN");
 
             GridPane.setHalignment(floorNum, HPos.CENTER);
             GridPane.setHalignment(upRequested, HPos.CENTER);
