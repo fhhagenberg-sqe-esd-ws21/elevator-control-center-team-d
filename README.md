@@ -25,3 +25,5 @@ Our process for pull requests was as follows: As soon as somebody finished a fea
 Then an other Team member made a Code review (usually together with the developer). 
 If issues were found, they had to be fixed and otherwise the pull request was accepted. 
 
+## Build it yourself
+`mvn clean package`
