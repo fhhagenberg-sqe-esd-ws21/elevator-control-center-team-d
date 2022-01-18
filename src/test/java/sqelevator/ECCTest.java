@@ -1,16 +1,11 @@
 package sqelevator;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
 import at.fhhagenberg.sqe.ElevatorMock;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -26,7 +21,7 @@ public class ECCTest {
             ecc = new ECC() {
                 @Override
                 protected IElevator getRmiInterface() throws RemoteException  {
-                    return new ElevatorMock(3, 10);
+                    return new ElevatorMock(3, 10, 100);
                 }
             };
             ecc.init();
@@ -89,7 +84,7 @@ public class ECCTest {
             ecc = new ECC() {
                 @Override
                 protected IElevator getRmiInterface() throws RemoteException  {
-                    return new ElevatorMock(3, 10);
+                    return new ElevatorMock(3, 10, 100);
                 }
             };
             ecc.update();
@@ -107,7 +102,7 @@ public class ECCTest {
             ecc = new ECC() {
                 @Override
                 protected IElevator getRmiInterface() throws RemoteException  {
-                    return new ElevatorMock(3, 10);
+                    return new ElevatorMock(3, 10, 100);
                 }
             };
             assertNull(ecc.getModel());
