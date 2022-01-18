@@ -91,7 +91,7 @@ public class App extends Application {
             tabs.getTabs().add(t.createTab());
         }
 
-        return new Scene(tabs, 800, 350);
+        return new Scene(tabs, 800, 450);
     }
     
     
