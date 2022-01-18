@@ -206,7 +206,7 @@ public class ElevatorMock implements IElevator {
         assertTrue(elevatorNumber >= 0 && elevatorNumber < elevatorNum);
         assertTrue(status >= IElevator.ELEVATOR_DOORS_OPEN && status <= IElevator.ELEVATOR_DOORS_CLOSING);
 
-        commitedDirection[elevatorNumber] = status;
+        doorStatus[elevatorNumber] = status;
     }
 
     
