@@ -54,7 +54,7 @@ public class ElevatorMock implements IElevator {
 
         for (int i = 0; i < nElevators; i++) {
             commitedDirection[i] = 0;
-            doorStatus[i] = 0;
+            doorStatus[i] = IElevator.ELEVATOR_DOORS_OPEN;
             targets[i] = 0;
             weights[i] = 0;
             accelerations[i] = 0;
